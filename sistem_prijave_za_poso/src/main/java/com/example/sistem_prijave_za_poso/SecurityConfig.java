@@ -1,4 +1,4 @@
-package com.example.sistem_prijave_za_poso;
+/*package com.example.sistem_prijave_za_poso;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -25,4 +25,4 @@ public class SecurityConfig {
             .logout(Customizer.withDefaults());
         return http.build();
     }
-}
+}*/

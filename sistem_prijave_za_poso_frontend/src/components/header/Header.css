@@ -1,0 +1,40 @@
+.navbar {
+    display: flex;
+    align-items: flex-start; 
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #007bff;
+    margin-right: auto; 
+}
+
+.navbar-nav {
+    display: flex;
+    margin-left: auto; 
+}
+
+.nav-link {
+    color: #007bff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 1rem; 
+}
+
+.nav-link:hover {
+    color: #0056b3;
+}
+
+@media (max-width: 570px) {
+    .navbar .nav-link {
+        margin-right: 0;
+    }
+}
+
+
+

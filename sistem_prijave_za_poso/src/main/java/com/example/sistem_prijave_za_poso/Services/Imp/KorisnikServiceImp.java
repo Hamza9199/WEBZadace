@@ -51,4 +51,20 @@ public class KorisnikServiceImp implements KorisnikService {
         return korisnici.stream()
                 .map((korisnik) -> KorisnikMapper.mapToKorisnikDto(korisnik)).collect(java.util.stream.Collectors.toList());
     }
+
+    @Override
+    public KorisnikDto updateKorisnik(int id, KorisnikDto updatedKorisnik){
+
+        Korisnik korisnik = korisnikRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
+
+
+       
+        korisnik.setEmail(updatedKorisnik.getEmail());
+        korisnik.setPassword(updatedKorisnik.getPassword());
+
+        Korisnik updatedKorisnikObj = korisnikRepository.save(korisnik);
+
+        return  KorisnikMapper.mapToKorisnikDto(updatedKorisnikObj);
+    }
 }

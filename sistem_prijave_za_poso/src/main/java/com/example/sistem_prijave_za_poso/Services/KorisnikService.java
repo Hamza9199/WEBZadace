@@ -14,4 +14,6 @@ public interface KorisnikService {
 
     List<KorisnikDto>getAllKorisnik();
 
+    KorisnikDto updateKorisnik(int id, KorisnikDto updatedKorisnik);
+
 }

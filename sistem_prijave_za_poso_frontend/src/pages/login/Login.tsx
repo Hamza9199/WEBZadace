@@ -39,14 +39,13 @@ const Login = () => {
 
             const data = await response.json();
             console.log(data);  
+            localStorage.setItem('isAuthenticated', 'true');
             navigate('/');
         
         
     };
-    
-    
-    
 
+    
    
 
     return (
@@ -73,7 +72,7 @@ const Login = () => {
                     />
                 </FormGroup>
 
-                <Button variant="primary" type="submit" className="submit-button">
+                <Button variant="primary" type="submit" className="submit-button" >
                     Login
                 </Button>
             </Form>

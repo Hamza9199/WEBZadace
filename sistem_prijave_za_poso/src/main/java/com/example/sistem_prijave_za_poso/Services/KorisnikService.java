@@ -1,25 +1,13 @@
 package com.example.sistem_prijave_za_poso.Services;
 
-import org.springframework.stereotype.Service;
 
-import com.example.sistem_prijave_za_poso.Repositories.KorisnikRepository;
-
-
-import com.example.sistem_prijave_za_poso.Models.Korisnik;
+import com.example.sistem_prijave_za_poso.Dto.KorisnikDto;
 
 
-@Service
-public class KorisnikService {
+public interface KorisnikService {
     
-    private final KorisnikRepository korisnikRepository;
+    KorisnikDto createKorisnik(KorisnikDto korisnikDto);
 
-    public KorisnikService(KorisnikRepository korisnikRepository) {
-        this.korisnikRepository = korisnikRepository;
-    }
-  
-
-    public Korisnik postKorisnik(Korisnik korisnik) {
-        return korisnikRepository.save(korisnik);
-    }
+    KorisnikDto getKorisnikById(int id);
 
 }

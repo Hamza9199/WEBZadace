@@ -7,6 +7,8 @@ import com.example.sistem_prijave_za_poso.Repositories.KorisnikRepository;
 import com.example.sistem_prijave_za_poso.Services.KorisnikService;
 import com.example.sistem_prijave_za_poso.Exception.ResourceNotFoundException;
 
+import java.util.List;
+
 import lombok.Data;
 
 import org.springframework.stereotype.Service;
@@ -41,4 +43,12 @@ public class KorisnikServiceImp implements KorisnikService {
         return KorisnikMapper.mapToKorisnikDto(korisnik);
     }
     
+
+    @Override
+    public List<KorisnikDto> getAllKorisnik() {
+        List<Korisnik> korisnici = korisnikRepository.findAll();
+
+        return korisnici.stream()
+                .map((korisnik) -> KorisnikMapper.mapToKorisnikDto(korisnik)).collect(java.util.stream.Collectors.toList());
+    }
 }

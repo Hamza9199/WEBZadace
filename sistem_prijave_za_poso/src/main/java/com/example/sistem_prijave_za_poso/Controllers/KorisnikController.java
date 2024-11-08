@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 import com.example.sistem_prijave_za_poso.Dto.KorisnikDto;
 import com.example.sistem_prijave_za_poso.Services.KorisnikService;
 
@@ -39,5 +41,12 @@ public class KorisnikController {
         return ResponseEntity.ok(korisnik);
     }
     
+
+    @GetMapping("/korisnici")
+    public ResponseEntity<List<KorisnikDto>> getAllKorisnici () {
+        List<KorisnikDto> korisnici = korisnikService.getAllKorisnik();
+
+        return ResponseEntity.ok(korisnici);
+    } 
     
 }

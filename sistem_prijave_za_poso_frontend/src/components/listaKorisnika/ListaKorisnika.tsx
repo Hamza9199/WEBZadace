@@ -16,9 +16,16 @@ const ListaKorisnika = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch("http://localhost:8080/api/korisnici");
-            const data = await response.json();
-            setKorisnici(data);
+            try {
+                const response = await fetch("http://localhost:8080/api/korisnici");
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                const data: Korisnik[] = await response.json();
+                setKorisnici(data);
+            } catch (error) {
+                console.error("Fetch error: ", error);
+            }
         }
         fetchData();
     }, []);
@@ -35,7 +42,7 @@ const ListaKorisnika = () => {
 
 
     const obrisiKorisnika = async (id: number) => {
-        const response = await fetch(`http://localhost:8080/api/korisnici/${id}`, {
+        const response = await fetch(`http://localhost:8080/api/korisnik/${id}`, {
             method: "DELETE"
         });
         if (response.ok) {
@@ -54,6 +61,7 @@ const ListaKorisnika = () => {
             <table className="table table-striped table-bordered">
                 <thead>
                     <tr>
+                        <th>id</th>
                         <th>email</th>
                         <th>sifra</th>
                     </tr>
@@ -62,6 +70,7 @@ const ListaKorisnika = () => {
                     {korisnici.map((korisnik) => {
                         return (
                             <tr key={korisnik.id}>
+                                <td>{korisnik.id}</td>
                                 <td>{korisnik.email}</td>
                                 <td>{korisnik.password}</td>
                                 <td>

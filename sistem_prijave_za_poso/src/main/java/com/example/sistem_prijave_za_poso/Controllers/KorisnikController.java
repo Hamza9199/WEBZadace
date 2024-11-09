@@ -38,8 +38,8 @@ public class KorisnikController {
     }   
 
 
-    @GetMapping("/korisnik/{Id}")
-    public ResponseEntity<KorisnikDto> getKorisnikById(int korisnikId) {
+    @GetMapping("/korisnik/{id}")
+    public ResponseEntity<KorisnikDto> getKorisnikById(@PathVariable("id") int korisnikId) {
         KorisnikDto korisnik = korisnikService.getKorisnikById(korisnikId);
         return ResponseEntity.ok(korisnik);
     }
@@ -53,13 +53,14 @@ public class KorisnikController {
     } 
 
 
-    @PutMapping("/korisnik/{Id}")
+    @PutMapping("/korisnik/{id}")
     public ResponseEntity<KorisnikDto> updateKorisnik(@PathVariable("id") int korisnikId, @RequestBody KorisnikDto korisnikDto) {
         KorisnikDto updatedKorisnik = korisnikService.updateKorisnik(korisnikId, korisnikDto);
         return ResponseEntity.ok(updatedKorisnik);
     }
 
-    @DeleteMapping("/korisnik/{Id}")
+    
+    @DeleteMapping("/korisnik/{id}")
     public ResponseEntity<String> deleteKorisnik(@PathVariable("id") int korisnikId) {
         korisnikService.deleteKorisnik(korisnikId);
         return ResponseEntity.ok("Korisnik sa id " + korisnikId + " je obrisan");

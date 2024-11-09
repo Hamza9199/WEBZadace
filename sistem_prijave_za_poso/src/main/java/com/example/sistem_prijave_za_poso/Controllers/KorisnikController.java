@@ -4,9 +4,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -51,10 +53,17 @@ public class KorisnikController {
     } 
 
 
-    @PostMapping("/korisnik/{Id}")
+    @PutMapping("/korisnik/{Id}")
     public ResponseEntity<KorisnikDto> updateKorisnik(@PathVariable("id") int korisnikId, @RequestBody KorisnikDto korisnikDto) {
         KorisnikDto updatedKorisnik = korisnikService.updateKorisnik(korisnikId, korisnikDto);
         return ResponseEntity.ok(updatedKorisnik);
     }
+
+    @DeleteMapping("/korisnik/{Id}")
+    public ResponseEntity<String> deleteKorisnik(@PathVariable("id") int korisnikId) {
+        korisnikService.deleteKorisnik(korisnikId);
+        return ResponseEntity.ok("Korisnik sa id " + korisnikId + " je obrisan");
+    } 
+
     
 }

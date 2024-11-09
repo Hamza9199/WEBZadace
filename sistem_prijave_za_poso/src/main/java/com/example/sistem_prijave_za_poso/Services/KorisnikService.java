@@ -16,4 +16,6 @@ public interface KorisnikService {
 
     KorisnikDto updateKorisnik(int id, KorisnikDto updatedKorisnik);
 
+    void deleteKorisnik(int id);
+
 }

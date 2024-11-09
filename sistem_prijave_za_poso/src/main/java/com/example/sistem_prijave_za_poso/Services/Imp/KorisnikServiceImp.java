@@ -67,4 +67,13 @@ public class KorisnikServiceImp implements KorisnikService {
 
         return  KorisnikMapper.mapToKorisnikDto(updatedKorisnikObj);
     }
+
+
+    @Override
+    public void deleteKorisnik(int id) {
+        Korisnik korisnik = korisnikRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
+
+        korisnikRepository.delete(korisnik);
+    }
 }

@@ -15,16 +15,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors()  // Enable CORS
+            .cors() 
             .and()
             .authorizeHttpRequests(authorizeRequests ->
                 authorizeRequests
-                    .requestMatchers("/api/**").permitAll()  // Allow unauthenticated access to API
-                    .anyRequest().authenticated() // Secure other endpoints
+                    .requestMatchers("/api/**").permitAll() 
+                    .anyRequest().authenticated() 
             )
-            .httpBasic() // Enable Basic Authentication (you can remove if using JWT)
+            .httpBasic() 
             .and()
-            .csrf().disable(); // Disable CSRF if you're using JWT or API-based authentication
+            .csrf().disable(); 
 
         return http.build();
     }
@@ -33,10 +33,10 @@ public class SecurityConfig {
     public UrlBasedCorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true); // Allow cookies or credentials if needed
-        config.addAllowedOrigin("http://localhost:5173"); // Frontend address
+        config.setAllowCredentials(true); 
+        config.addAllowedOrigin("http://localhost:5173"); 
         config.addAllowedHeader("*");
-        config.addAllowedMethod("*"); // Allow all HTTP methods (GET, POST, etc.)
+        config.addAllowedMethod("*"); 
         source.registerCorsConfiguration("/**", config);
         return source;
     }

@@ -9,11 +9,9 @@ import com.example.sistem_prijave_za_poso.Exception.ResourceNotFoundException;
 
 import java.util.List;
 
-import lombok.Data;
 
 import org.springframework.stereotype.Service;
 
-@Data
 @Service
 public class KorisnikServiceImp implements KorisnikService {
 

@@ -15,63 +15,63 @@ import org.springframework.stereotype.Service;
 @Service
 public class KorisnikServiceImp implements KorisnikService {
 
-    private final KorisnikRepository korisnikRepository;
+	private final KorisnikRepository korisnikRepository;
 
-    public KorisnikServiceImp(KorisnikRepository korisnikRepository){
-        this.korisnikRepository = korisnikRepository;
-    }
-    
-    @Override
-    public KorisnikDto createKorisnik(KorisnikDto korisnikDto) {
+	public KorisnikServiceImp(KorisnikRepository korisnikRepository){
+		this.korisnikRepository = korisnikRepository;
+	}
 
-        Korisnik korisnik = KorisnikMapper.mapToKorisnik(korisnikDto);
+	@Override
+	public KorisnikDto createKorisnik(KorisnikDto korisnikDto) {
 
-        Korisnik savedKorisnik = korisnikRepository.save(korisnik);
+		Korisnik korisnik = KorisnikMapper.mapToKorisnik(korisnikDto);
 
-        return KorisnikMapper.mapToKorisnikDto(savedKorisnik);
-    }
+		Korisnik savedKorisnik = korisnikRepository.save(korisnik);
 
-    @Override
-    public KorisnikDto getKorisnikById(int id) {
+		return KorisnikMapper.mapToKorisnikDto(savedKorisnik);
+	}
 
-        Korisnik korisnik = korisnikRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
+	@Override
+	public KorisnikDto getKorisnikById(int id) {
 
-
-        return KorisnikMapper.mapToKorisnikDto(korisnik);
-    }
-    
-
-    @Override
-    public List<KorisnikDto> getAllKorisnik() {
-        List<Korisnik> korisnici = korisnikRepository.findAll();
-
-        return korisnici.stream()
-                .map((korisnik) -> KorisnikMapper.mapToKorisnikDto(korisnik)).collect(java.util.stream.Collectors.toList());
-    }
-
-    @Override
-    public KorisnikDto updateKorisnik(int id, KorisnikDto updatedKorisnik){
-
-        Korisnik korisnik = korisnikRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
+		Korisnik korisnik = korisnikRepository.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
 
 
-       
-        korisnik.setEmail(updatedKorisnik.getEmail());
-        korisnik.setPassword(updatedKorisnik.getPassword());
-
-        Korisnik updatedKorisnikObj = korisnikRepository.save(korisnik);
-
-        return  KorisnikMapper.mapToKorisnikDto(updatedKorisnikObj);
-    }
+		return KorisnikMapper.mapToKorisnikDto(korisnik);
+	}
 
 
-    @Override
-    public void deleteKorisnik(int id) {
-        Korisnik korisnik = korisnikRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
+	@Override
+	public List<KorisnikDto> getAllKorisnik() {
+		List<Korisnik> korisnici = korisnikRepository.findAll();
 
-        korisnikRepository.delete(korisnik);
-    }
+		return korisnici.stream()
+			.map((korisnik) -> KorisnikMapper.mapToKorisnikDto(korisnik)).collect(java.util.stream.Collectors.toList());
+	}
+
+	@Override
+	public KorisnikDto updateKorisnik(int id, KorisnikDto updatedKorisnik){
+
+		Korisnik korisnik = korisnikRepository.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
+
+
+
+		korisnik.setEmail(updatedKorisnik.getEmail());
+		korisnik.setPassword(updatedKorisnik.getPassword());
+
+		Korisnik updatedKorisnikObj = korisnikRepository.save(korisnik);
+
+		return  KorisnikMapper.mapToKorisnikDto(updatedKorisnikObj);
+	}
+
+
+	@Override
+	public void deleteKorisnik(int id) {
+		Korisnik korisnik = korisnikRepository.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
+
+		korisnikRepository.delete(korisnik);
+	}
 }

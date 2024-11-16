@@ -3,17 +3,19 @@ package com.example.sistem_prijave_za_poso.Dto;
 public class JobDto {
 
     private int id;
-    private String imeFirme;
     private String naziv;
-    private String deskripcija;
+    private String opis;
+    private int rating;
+    private int kategorijaId; 
 
-    private JobDto() {}
+    public JobDto() {}
 
-    public JobDto(int id, String imeFirme, String naziv, String deskripcija) {
+    public JobDto(int id, String naziv, String opis, int rating, int kategorijaId) {
         this.id = id;
-        this.imeFirme = imeFirme;
         this.naziv = naziv;
-        this.deskripcija = deskripcija;
+        this.opis = opis;
+        this.rating = rating;
+        this.kategorijaId = kategorijaId;
     }
 
     public int getId() {
@@ -24,14 +26,6 @@ public class JobDto {
         this.id = id;
     }
 
-    public String getImeFirme() {
-        return imeFirme;
-    }
-
-    public void setImeFirme(String imeFirme) {
-        this.imeFirme = imeFirme;
-    }
-
     public String getNaziv() {
         return naziv;
     }
@@ -40,11 +34,27 @@ public class JobDto {
         this.naziv = naziv;
     }
 
-    public String getDeskripcija() {
-        return deskripcija;
+    public String getOpis() {
+        return opis;
     }
 
-    public void setDeskripcija(String deskripcija) {
-        this.deskripcija = deskripcija;
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public int getKategorijaId() {
+        return kategorijaId;
+    }
+
+    public void setKategorijaId(int kategorijaId) {
+        this.kategorijaId = kategorijaId;
     }
 }

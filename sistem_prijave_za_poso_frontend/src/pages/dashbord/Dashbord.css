@@ -1,0 +1,35 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.dashboard-section {
+    margin-bottom: 30px;
+}
+
+.dashboard-section h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.lista-poslova, .lista-korisnika {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
+
+.lista-poslova ul, .lista-korisnika ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.lista-poslova li, .lista-korisnika li {
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+.lista-poslova li:last-child, .lista-korisnika li:last-child {
+    border-bottom: none;
+}

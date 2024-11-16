@@ -4,6 +4,8 @@ import com.example.sistem_prijave_za_poso.Dto.JobDto;
 import com.example.sistem_prijave_za_poso.Exception.ResourceNotFoundException;
 import com.example.sistem_prijave_za_poso.Mapper.JobMapper;
 import com.example.sistem_prijave_za_poso.Models.Job;
+import com.example.sistem_prijave_za_poso.Models.JobCategory;
+import com.example.sistem_prijave_za_poso.Repositories.JobCategoryRepository;
 import com.example.sistem_prijave_za_poso.Repositories.JobRepository;
 import com.example.sistem_prijave_za_poso.Services.JobService;
 
@@ -16,15 +18,21 @@ import java.util.stream.Collectors;
 public class JobServiceImp implements JobService {
 
     private final JobRepository jobRepository;
+    private final JobCategoryRepository jobCategoryRepository;
 
-    public JobServiceImp(JobRepository jobRepository) {
+    public JobServiceImp(JobRepository jobRepository, JobCategoryRepository jobCategoryRepository) {
         this.jobRepository = jobRepository;
+        this.jobCategoryRepository = jobCategoryRepository;
     }
 
     @Override
     public JobDto createJob(JobDto jobDto) {
-        Job job = JobMapper.mapToJob(jobDto);
+        JobCategory kategorija = jobCategoryRepository.findById(jobDto.getKategorijaId())
+                .orElseThrow(() -> new ResourceNotFoundException("Kategorija sa ID-em " + jobDto.getKategorijaId() + " nije pronađena."));
+
+        Job job = JobMapper.mapToJob(jobDto, kategorija);
         Job savedJob = jobRepository.save(job);
+
         return JobMapper.mapToJobDto(savedJob);
     }
 
@@ -49,9 +57,7 @@ public class JobServiceImp implements JobService {
         Job existingJob = jobRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Posao sa ID-om " + id + " nije pronađen."));
 
-        existingJob.setImeFirme(jobDto.getImeFirme());
         existingJob.setNaziv(jobDto.getNaziv());
-        existingJob.setDeskripcija(jobDto.getDeskripcija());
 
         Job updatedJob = jobRepository.save(existingJob);
         return JobMapper.mapToJobDto(updatedJob);
@@ -64,4 +70,21 @@ public class JobServiceImp implements JobService {
         }
         jobRepository.deleteById(id);
     }
+    
+    @Override
+    public List<JobDto> getJobsByCategory(int kategorijaId) {
+        JobCategory kategorija = jobCategoryRepository.findById(kategorijaId)
+                .orElseThrow(() -> new ResourceNotFoundException("Kategorija sa ID-em " + kategorijaId + " nije pronađena."));
+
+        return jobRepository.findByKategorija(kategorija)
+                .stream()
+                .map(jobCategory -> JobMapper.mapToJobDto(jobCategory)) 
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<JobDto> filterJobsByCategory(String kategorija) {
+        return jobRepository.findByKategorija2(kategorija);
+}
+
 }

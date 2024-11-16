@@ -49,4 +49,10 @@ public class JobController {
         jobService.deleteJob(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/category/{id}")
+    public ResponseEntity<List<JobDto>> getJobsByCategory(@PathVariable int id) {
+        List<JobDto> jobs = jobService.getJobsByCategory(id);
+        return ResponseEntity.ok(jobs);
+    }
 }

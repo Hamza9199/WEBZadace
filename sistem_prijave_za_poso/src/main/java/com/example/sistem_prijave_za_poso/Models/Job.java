@@ -1,15 +1,8 @@
 package com.example.sistem_prijave_za_poso.Models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "poslovi")
@@ -20,29 +13,29 @@ public class Job {
     private int id;
 
     @NotBlank
-    @Size(min = 2)
-    @JsonProperty("imeFirme")
-    @Column(name = "imeFirme")
-    private String imeFirme;
-
-    @NotBlank
-    @Size(min = 2)
-    @JsonProperty("naziv")
-    @Column(name = "naziv")
+    @Column(name = "naziv", nullable = false)
     private String naziv;
 
     @NotBlank
-    @JsonProperty("deskripcija")
-    @Column(name = "deskripcija")
-    private String deskripcija;
+    @Column(name = "opis", nullable = false)
+    private String opis;
 
-    private Job() {}
+    @NotNull
+    @Column(name = "rating")
+    private int rating;
 
-    public Job(int id, String imeFirme, String naziv, String deskripcija) {
+    @ManyToOne
+    @JoinColumn(name = "kategorija_id", nullable = false)
+    private JobCategory kategorija;
+
+    public Job() {}
+
+    public Job(int id, String naziv, String opis, int rating, JobCategory kategorija) {
         this.id = id;
-        this.imeFirme = imeFirme;
         this.naziv = naziv;
-        this.deskripcija = deskripcija;
+        this.opis = opis;
+        this.rating = rating;
+        this.kategorija = kategorija;
     }
 
     public int getId() {
@@ -53,14 +46,6 @@ public class Job {
         this.id = id;
     }
 
-    public String getImeFirme() {
-        return imeFirme;
-    }
-
-    public void setImeFirme(String imeFirme) {
-        this.imeFirme = imeFirme;
-    }
-
     public String getNaziv() {
         return naziv;
     }
@@ -69,11 +54,27 @@ public class Job {
         this.naziv = naziv;
     }
 
-    public String getDeskripcija() {
-        return deskripcija;
+    public String getOpis() {
+        return opis;
     }
 
-    public void setDeskripcija(String deskripcija) {
-        this.deskripcija = deskripcija;
+    public void setOpis(String opis) {
+        this.opis = opis;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public JobCategory getKategorija() {
+        return kategorija;
+    }
+
+    public void setKategorija(JobCategory kategorija) {
+        this.kategorija = kategorija;
     }
 }

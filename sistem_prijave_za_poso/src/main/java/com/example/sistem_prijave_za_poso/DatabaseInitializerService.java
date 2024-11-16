@@ -1,6 +1,7 @@
 package com.example.sistem_prijave_za_poso;
  
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,8 @@ public class DatabaseInitializerService {
     @Value("${spring.datasource.password}")
     private String dbPassword;
 
-    private final String databaseName = "projekat_baza"; 
+
+    private final String databaseName = "projekat_baza";
 
     @PostConstruct
     public void initializeDatabase() {
@@ -42,3 +44,4 @@ public class DatabaseInitializerService {
         }
     }
 }
+

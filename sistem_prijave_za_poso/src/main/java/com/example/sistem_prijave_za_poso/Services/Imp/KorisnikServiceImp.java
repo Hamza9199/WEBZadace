@@ -103,4 +103,17 @@ public class KorisnikServiceImp implements KorisnikService, UserDetailsService
 			throw new UsernameNotFoundException("Korisnik " + email + " ne postoji");
 		}
 	}
+
+
+	@Override
+	public KorisnikDto getKorisnikByEmail (String email)
+	{
+
+		Korisnik korisnik = korisnikRepository.findByEmail(email)
+			.orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + email + " nepostoji"));
+
+
+		return KorisnikMapper.mapToKorisnikDto(korisnik);
+	}
+
 }

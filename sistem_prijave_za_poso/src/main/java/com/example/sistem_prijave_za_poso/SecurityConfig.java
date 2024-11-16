@@ -49,29 +49,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and()
-                .csrf().disable()
-//                .formLogin(httpForm -> { // Configures form login
-//                    httpForm
-//                            .loginPage("/api/login") // Custom login page
-//                            .permitAll(); // Allows access to the login page
-//                })
-                .httpBasic()
-                .and()
-                .authorizeHttpRequests(authorizeRequests -> {
-                    authorizeRequests
-                            .requestMatchers("/api/register").permitAll()
-                            .requestMatchers("/api/**").permitAll()
-                            .anyRequest().authenticated();
-                })
-                .logout()
-                .logoutUrl("/api/logout")
-                .logoutSuccessUrl("/api/login")
-                .invalidateHttpSession(true)
-                .clearAuthentication(true)
-                .deleteCookies("JSESSIONID");
-
+            .cors()  
+            .and()
+            .authorizeHttpRequests(authorizeRequests ->
+                authorizeRequests
+                    .requestMatchers("/api/**").permitAll()  
+                    .anyRequest().authenticated() 
+            )
+            .httpBasic() 
+            .and()
+            .csrf().disable(); 
 
         return http.build();
     }

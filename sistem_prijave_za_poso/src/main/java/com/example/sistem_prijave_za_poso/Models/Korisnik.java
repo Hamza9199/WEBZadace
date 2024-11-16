@@ -3,11 +3,10 @@ package com.example.sistem_prijave_za_poso.Models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "korisnik")
+@Table(name = "korisnici")
 public class Korisnik {
 
     @Id

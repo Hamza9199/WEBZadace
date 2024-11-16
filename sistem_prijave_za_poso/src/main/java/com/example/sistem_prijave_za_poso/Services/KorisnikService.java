@@ -18,4 +18,6 @@ public interface KorisnikService {
 
     void deleteKorisnik(int id);
 
+    KorisnikDto getKorisnikByEmail(String email);
+
 }

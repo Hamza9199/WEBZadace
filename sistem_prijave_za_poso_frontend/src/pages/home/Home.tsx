@@ -8,8 +8,17 @@ export const Home = () => {
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem('isAuthenticated');
+
+      const response = await fetch('http://localhost:8080/api/logout', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      });
+
+      console.log(response.status)
 
     navigate('/login');
   };

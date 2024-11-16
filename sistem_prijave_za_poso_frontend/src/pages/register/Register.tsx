@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import './Login.css';
+import './Register.css';
 import { Form, Button, FormControl, FormGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Register = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -31,32 +31,28 @@ const Login = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     
-        if (validate()) {
-            try {
-                const response = await fetch('http://localhost:8080/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
-    
-                if (!response.ok) {
-                    const error = await response.text(); 
-                    alert(error);
-                    return;
-                }
-    
-                const data = await response.json();
-                console.log(data);
-                localStorage.setItem('isAuthenticated', 'true');
-                navigate('/');
-            } catch (error) {
-                console.error('Greška prilikom logovanja:', error);
-            }
+        if(validate()){
+        const response = await fetch('http://localhost:8080/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+        
+        if (!response.ok) {
+            console.error('Neuspešna prijava');
+            return;
         }
+        
+
+            const data = await response.json();
+            console.log(data);  
+            localStorage.setItem('isAuthenticated', 'true');
+            navigate('/');
+        }
+        
     };
-    
 
     const validate = () => {
         let valid = true;
@@ -109,15 +105,11 @@ const Login = () => {
         setErrors(errorsCopy);
         return valid;
     };
-
-    const handleChange = () => {
-        navigate("/register")
-    }
    
 
     return (
         <div className="center-form">
-            <h1 className="naslov">Login</h1>
+            <h1 className="naslov">Register</h1>
             <Form onSubmit={handleSubmit}>
             <FormGroup controlId="formBasicEmail">
                 <FormControl
@@ -151,13 +143,9 @@ const Login = () => {
                 Login
             </Button>
             </Form>
-
-
-            <label onClick={handleChange}>
-                Nemate profil?
-            </label>
         </div>
     );
 };
 
-export default Login;
+
+export default Register;

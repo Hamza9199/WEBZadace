@@ -1,28 +1,34 @@
 package com.example.sistem_prijave_za_poso.Services.Imp;
 
 import com.example.sistem_prijave_za_poso.Dto.KorisnikDto;
+import com.example.sistem_prijave_za_poso.Exception.ResourceNotFoundException;
 import com.example.sistem_prijave_za_poso.Mapper.KorisnikMapper;
 import com.example.sistem_prijave_za_poso.Models.Korisnik;
 import com.example.sistem_prijave_za_poso.Repositories.KorisnikRepository;
 import com.example.sistem_prijave_za_poso.Services.KorisnikService;
-import com.example.sistem_prijave_za_poso.Exception.ResourceNotFoundException;
-
-import java.util.List;
-
-
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
-public class KorisnikServiceImp implements KorisnikService {
+public class KorisnikServiceImp implements KorisnikService, UserDetailsService
+{
 
 	private final KorisnikRepository korisnikRepository;
 
-	public KorisnikServiceImp(KorisnikRepository korisnikRepository){
+	public KorisnikServiceImp (KorisnikRepository korisnikRepository)
+	{
 		this.korisnikRepository = korisnikRepository;
 	}
 
 	@Override
-	public KorisnikDto createKorisnik(KorisnikDto korisnikDto) {
+	public KorisnikDto createKorisnik (KorisnikDto korisnikDto)
+	{
 
 		Korisnik korisnik = KorisnikMapper.mapToKorisnik(korisnikDto);
 
@@ -32,7 +38,8 @@ public class KorisnikServiceImp implements KorisnikService {
 	}
 
 	@Override
-	public KorisnikDto getKorisnikById(int id) {
+	public KorisnikDto getKorisnikById (int id)
+	{
 
 		Korisnik korisnik = korisnikRepository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
@@ -43,7 +50,8 @@ public class KorisnikServiceImp implements KorisnikService {
 
 
 	@Override
-	public List<KorisnikDto> getAllKorisnik() {
+	public List<KorisnikDto> getAllKorisnik ()
+	{
 		List<Korisnik> korisnici = korisnikRepository.findAll();
 
 		return korisnici.stream()
@@ -51,11 +59,11 @@ public class KorisnikServiceImp implements KorisnikService {
 	}
 
 	@Override
-	public KorisnikDto updateKorisnik(int id, KorisnikDto updatedKorisnik){
+	public KorisnikDto updateKorisnik (int id, KorisnikDto updatedKorisnik)
+	{
 
 		Korisnik korisnik = korisnikRepository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
-
 
 
 		korisnik.setEmail(updatedKorisnik.getEmail());
@@ -63,15 +71,36 @@ public class KorisnikServiceImp implements KorisnikService {
 
 		Korisnik updatedKorisnikObj = korisnikRepository.save(korisnik);
 
-		return  KorisnikMapper.mapToKorisnikDto(updatedKorisnikObj);
+		return KorisnikMapper.mapToKorisnikDto(updatedKorisnikObj);
 	}
 
 
 	@Override
-	public void deleteKorisnik(int id) {
+	public void deleteKorisnik (int id)
+	{
 		Korisnik korisnik = korisnikRepository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("Korisnik sa " + id + " nepostoji"));
 
 		korisnikRepository.delete(korisnik);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername (String email) throws UsernameNotFoundException
+	{
+		Optional<Korisnik> korisnik = korisnikRepository.findByEmail(email);
+
+		if ( korisnik.isPresent() )
+		{
+			var userObj = korisnik.get();
+			return User
+				.builder()
+				.username(userObj.getEmail())
+				.password(userObj.getPassword())
+				.build();
+		}
+		else
+		{
+			throw new UsernameNotFoundException("Korisnik " + email + " ne postoji");
+		}
 	}
 }

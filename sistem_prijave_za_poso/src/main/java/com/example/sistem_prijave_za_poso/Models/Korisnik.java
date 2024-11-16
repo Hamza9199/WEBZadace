@@ -21,8 +21,7 @@ public class Korisnik {
     private String email;
 
     @NotBlank(message = "Sifra ne može biti prazna")
-    @Size(min = 5, max = 50, message = "Sifra mora biti između 5 i 50 karaktera")
-    @JsonIgnore // 
+    @Size(min = 5, max = 256, message = "Sifra mora biti između 5 i 256 karaktera")
     @Column(name = "password")
     private String password;
 

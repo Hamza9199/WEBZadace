@@ -35,10 +35,10 @@ const Header = () => {
             <Container>
                 <Navbar.Brand href="/">Sistem prijave za poso</Navbar.Brand>
                 <Nav className="ml-auto">
-                    <Nav.Link as={Link} to="/" className='nav-link'>Korisnik</Nav.Link>
                     <Nav.Link as={Link} to="/login" onClick={handleLogout} className='nav-link'>Logout</Nav.Link>
-                    <Nav.Link as={Link} to="/dashboard" className='nav-link'>Lista Korisnika</Nav.Link>
-                    <Nav.Link as={Link} to={`/profil/${userId}`} className="nav-link">Profil</Nav.Link>                </Nav>
+                    <Nav.Link as={Link} to={`/profil/${userId}`} className="nav-link">Profil</Nav.Link> 
+                    <Nav.Link as={Link} to="/dashboard" className='nav-link'>Dashboard</Nav.Link>
+                    </Nav>
             </Container>
         </Navbar>
     );

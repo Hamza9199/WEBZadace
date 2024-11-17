@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Header } from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 
 interface Korisnik {
   id: number;
@@ -64,33 +66,37 @@ const Profil = () => {
   };
 
   return (
-    <div className="profile-page">
-      {korisnik ? (
-        <div>
-          <h2>Profil Korisnika</h2>
-          <p><strong>Email:</strong> {korisnik.email}</p>
+    <>
+      <Header/>
+      <div className="profile-page">
+        {korisnik ? (
           <div>
-            <input
-              type="email"
-              placeholder="Novi email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-            />
+            <h2>Profil Korisnika</h2>
+            <p><strong>Email:</strong> {korisnik.email}</p>
+            <div>
+              <input
+                type="email"
+                placeholder="Novi email"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Nova lozinka"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </div>
+            <button onClick={handleUpdate}>Ažuriraj Profil</button>
           </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Nova lozinka"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-          </div>
-          <button onClick={handleUpdate}>Ažuriraj Profil</button>
-        </div>
-      ) : (
-        <p>Učitavanje...</p>
-      )}
-    </div>
+        ) : (
+          <p>Učitavanje...</p>
+        )}
+      </div>
+      <Footer/>
+    </>
   );
 };
 

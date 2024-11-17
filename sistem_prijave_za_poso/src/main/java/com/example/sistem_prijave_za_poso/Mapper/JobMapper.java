@@ -29,7 +29,8 @@ public class JobMapper {
                 jobDto.getNaziv(),
                 jobDto.getOpis(),
                 jobDto.getRating(),
-                jobDto.getKategorijaId()
+                jobDto.getKategorija() 
         );
     }
 }
+

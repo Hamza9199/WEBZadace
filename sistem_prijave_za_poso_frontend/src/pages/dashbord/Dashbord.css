@@ -33,3 +33,15 @@
 .lista-poslova li:last-child, .lista-korisnika li:last-child {
     border-bottom: none;
 }
+
+
+.charts-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .chart {
+    width: 45%;
+  }

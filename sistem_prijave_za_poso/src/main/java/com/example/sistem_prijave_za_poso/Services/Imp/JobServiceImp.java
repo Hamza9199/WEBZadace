@@ -53,12 +53,15 @@ public class JobServiceImp implements JobService {
     public JobDto updateJob(int id, JobDto jobDto) {
         Job existingJob = jobRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Posao sa ID-om " + id + " nije pronađen."));
-
+    
         existingJob.setNaziv(jobDto.getNaziv());
-
+        existingJob.setOpis(jobDto.getOpis());
+        existingJob.setKategorija(jobDto.getKategorija()); 
+    
         Job updatedJob = jobRepository.save(existingJob);
         return JobMapper.mapToJobDto(updatedJob);
     }
+    
 
     @Override
     public void deleteJob(int id) {

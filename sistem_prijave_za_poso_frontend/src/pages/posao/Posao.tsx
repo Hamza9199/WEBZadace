@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Header } from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 
 
 interface Job {
@@ -14,6 +16,7 @@ const Posao = () => {
   const { id } = useParams<{ id: string }>(); 
   const [job, setJob] = useState<Job | null>(null); 
   const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -39,21 +42,33 @@ const Posao = () => {
     return <div>Učitavanje...</div>;
   }
 
+  const handleReview = () => {
+      navigate("/noviReview")
+  }
 
   return (
-    <div className="job-details">
-      {job ? (
-        <div>
-          <h2>{job.naziv}</h2>
-          <p><strong>Kategorija:</strong> {job.kategorija}</p> 
-          <p><strong>Ocjena:</strong> {job.rating}</p> 
-          <p><strong>Opis:</strong></p>
-          <p>{job.opis}</p>
-        </div>
-      ) : (
-        <div>Posao nije pronađen.</div>
-      )}
-    </div>
+  <>
+    <Header/>
+      <div>
+        <label onClick={handleReview}>
+            Ostavi Review Na Posao
+        </label>
+      </div>
+      <div className="job-details">
+        {job ? (
+          <div>
+            <h2>{job.naziv}</h2>
+            <p><strong>Kategorija:</strong> {job.kategorija}</p> 
+            <p><strong>Ocjena:</strong> {job.rating}</p> 
+            <p><strong>Opis:</strong></p>
+            <p>{job.opis}</p>
+          </div>
+        ) : (
+          <div>Posao nije pronađen.</div>
+        )}
+      </div>
+      <Footer/>
+    </>
   );
 };
 

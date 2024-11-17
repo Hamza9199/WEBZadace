@@ -51,11 +51,11 @@ public class JobDto {
         this.rating = rating;
     }
 
-    public String getKategorijaId() {
+    public String getKategorija() {
         return kategorija;
     }
 
-    public void setKategorijaId(String kategorija) {
+    public void setKategorija(String kategorija) {
         this.kategorija = kategorija;
     }
 }

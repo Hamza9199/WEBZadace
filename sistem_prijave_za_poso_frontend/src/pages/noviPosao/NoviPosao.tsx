@@ -6,7 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 const NoviPosao = () => {
     const [naziv, setNaziv] = useState("");
     const [opis, setOpis] = useState("");
-    const [kategorija, setKategorija] = useState("");
+    const [kategorija, setKategorija] = useState(""); 
+    const [rating, setRating] = useState("");
     const kategorije = ["IT", "Marketing", "Finansije", "Menadžment", "Prodaja"]; 
 
     const { id } = useParams<{ id: string }>();
@@ -22,7 +23,9 @@ const NoviPosao = () => {
                         const data = await response.json();
                         setNaziv(data.naziv);
                         setOpis(data.opis);
-                        setKategorija(data.kategorija);
+                        setRating(data.rating)
+                        setKategorija(data.kategorija); 
+                        
                     } else {
                         console.error("Failed to fetch job data");
                     }
@@ -76,12 +79,14 @@ const NoviPosao = () => {
 
         if (!validate()) return;
 
-        const data = { naziv, opis, kategorija };
+        const data = { naziv, opis, rating , kategorija };
         const url = numericId
             ? `http://localhost:8080/api/jobs/${numericId}`
             : "http://localhost:8080/api/jobs";
 
         const method = numericId ? "PUT" : "POST";
+
+        console.log("Sending data:", data);  
 
         try {
             const response = await fetch(url, {
@@ -91,6 +96,7 @@ const NoviPosao = () => {
             });
 
             if (response.ok) {
+                
                 navigate("/dashboard");
             } else {
                 console.error("Failed to save job");

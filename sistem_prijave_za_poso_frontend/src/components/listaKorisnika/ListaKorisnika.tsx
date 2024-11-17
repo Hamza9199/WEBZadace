@@ -53,9 +53,7 @@ const ListaKorisnika = () => {
     
     return (
         <div className="container ">
-            <h2 className="text-center">Lista korisnika</h2>
-            <br/>
-
+           
             <button className="btn btn-primary" onClick={dodajKorisnika}>Dodaj korisnika</button>
 
             <table className="table table-striped table-bordered">

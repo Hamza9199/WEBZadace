@@ -2,7 +2,6 @@ package com.example.sistem_prijave_za_poso.Models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "poslovi")
@@ -20,17 +19,16 @@ public class Job {
     @Column(name = "opis", nullable = false)
     private String opis;
 
-    @NotNull
+    
     @Column(name = "rating")
     private int rating;
 
-    @ManyToOne
-    @JoinColumn(name = "kategorija_id", nullable = false)
-    private JobCategory kategorija;
+    @Column(name= "kategorija")
+    private String kategorija;
 
     public Job() {}
 
-    public Job(int id, String naziv, String opis, int rating, JobCategory kategorija) {
+    public Job(int id, String naziv, String opis, int rating, String kategorija) {
         this.id = id;
         this.naziv = naziv;
         this.opis = opis;
@@ -70,11 +68,11 @@ public class Job {
         this.rating = rating;
     }
 
-    public JobCategory getKategorija() {
+    public String getKategorija() {
         return kategorija;
     }
 
-    public void setKategorija(JobCategory kategorija) {
+    public void setKategorija(String kategorija) {
         this.kategorija = kategorija;
     }
 }

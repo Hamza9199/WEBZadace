@@ -1,11 +1,9 @@
 package com.example.sistem_prijave_za_poso.Controllers;
 
-import com.example.sistem_prijave_za_poso.Models.JobCategory;
 import com.example.sistem_prijave_za_poso.Services.StatisticsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
 
 @RestController
 @CrossOrigin("*")
@@ -24,11 +22,7 @@ public class StatisticsController {
         return ResponseEntity.ok(averageRating);
     }
 
-    @GetMapping("/jobs-by-category")
-    public ResponseEntity<Map<JobCategory, Long>> getJobCountByCategory() {
-        Map<JobCategory, Long> jobCountByCategory = statisticsService.getJobCountByCategory();
-        return ResponseEntity.ok(jobCountByCategory);
-    }
+   
 
     @GetMapping("/total-jobs")
     public ResponseEntity<Long> getTotalJobs() {

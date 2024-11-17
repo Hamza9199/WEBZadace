@@ -23,10 +23,12 @@ const Header = () => {
         console.log(response.status)
 
         localStorage.removeItem('isAuthenticated');
-
+        localStorage.removeItem('userId'); 
     
         navigate('/login');
       };
+
+    const userId = localStorage.getItem('userId');
 
     return (
         <Navbar bg="dark" variant="dark" fixed="top">
@@ -36,7 +38,7 @@ const Header = () => {
                     <Nav.Link as={Link} to="/" className='nav-link'>Korisnik</Nav.Link>
                     <Nav.Link as={Link} to="/login" onClick={handleLogout} className='nav-link'>Logout</Nav.Link>
                     <Nav.Link as={Link} to="/dashboard" className='nav-link'>Lista Korisnika</Nav.Link>
-                </Nav>
+                    <Nav.Link as={Link} to={`/profil/${userId}`} className="nav-link">Profil</Nav.Link>                </Nav>
             </Container>
         </Navbar>
     );

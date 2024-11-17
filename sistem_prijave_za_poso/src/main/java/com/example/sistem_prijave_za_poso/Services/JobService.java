@@ -16,8 +16,6 @@ public interface JobService {
 
     void deleteJob(int id);
 
-    List<JobDto> getJobsByCategory(int kategorijaId); 
 
-    List<JobDto> filterJobsByCategory(String category);
 
 }

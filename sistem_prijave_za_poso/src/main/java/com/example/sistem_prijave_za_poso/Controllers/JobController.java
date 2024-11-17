@@ -3,6 +3,7 @@ package com.example.sistem_prijave_za_poso.Controllers;
 import com.example.sistem_prijave_za_poso.Dto.JobDto;
 import com.example.sistem_prijave_za_poso.Services.JobService;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +23,11 @@ public class JobController {
 
     @PostMapping
     public ResponseEntity<JobDto> createJob(@RequestBody JobDto jobDto) {
-        JobDto savedJob = jobService.createJob(jobDto);
+        JobDto savedJob = jobService.createJob(jobDto); 
         return new ResponseEntity<>(savedJob, HttpStatus.CREATED);
     }
+    
+
 
     @GetMapping("/{id}")
     public ResponseEntity<JobDto> getJobById(@PathVariable int id) {
@@ -50,9 +53,5 @@ public class JobController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/category/{id}")
-    public ResponseEntity<List<JobDto>> getJobsByCategory(@PathVariable int id) {
-        List<JobDto> jobs = jobService.getJobsByCategory(id);
-        return ResponseEntity.ok(jobs);
-    }
+    
 }

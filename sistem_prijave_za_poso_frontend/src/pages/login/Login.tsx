@@ -50,6 +50,7 @@ const Login = () => {
                 const data = await response.json();
                 console.log(data);
                 localStorage.setItem('isAuthenticated', 'true');
+                localStorage.setItem('userId', data.id); 
                 navigate('/');
             } catch (error) {
                 console.error('Greška prilikom logovanja:', error);

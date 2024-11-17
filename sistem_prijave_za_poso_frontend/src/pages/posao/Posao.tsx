@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-interface JobCategory {
-  id: number;
-  naziv: string; 
-}
 
 interface Job {
   id: number;
   naziv: string;
   opis: string;
   rating: number;
-  kategorija: JobCategory; 
+  kategorija: string; 
 }
 
 const Posao = () => {
@@ -49,7 +45,7 @@ const Posao = () => {
       {job ? (
         <div>
           <h2>{job.naziv}</h2>
-          <p><strong>Kategorija:</strong> {job.kategorija.naziv}</p> 
+          <p><strong>Kategorija:</strong> {job.kategorija}</p> 
           <p><strong>Ocjena:</strong> {job.rating}</p> 
           <p><strong>Opis:</strong></p>
           <p>{job.opis}</p>

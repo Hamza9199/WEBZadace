@@ -48,8 +48,7 @@ const Register = () => {
 
             const data = await response.json();
             console.log(data);  
-            localStorage.setItem('isAuthenticated', 'true');
-            navigate('/');
+            navigate('/login');
         }
         
     };

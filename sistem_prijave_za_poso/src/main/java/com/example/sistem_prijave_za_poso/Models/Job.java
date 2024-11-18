@@ -26,14 +26,26 @@ public class Job {
     @Column(name= "kategorija")
     private String kategorija;
 
+    @Column(name = "kreatorid")
+    private int kreatorid; //foreign key od Korisnka koji je kreirao posao
+
     public Job() {}
 
-    public Job(int id, String naziv, String opis, int rating, String kategorija) {
+    public Job(int id, String naziv, String opis, int rating, String kategorija, int kreatorid) {
         this.id = id;
         this.naziv = naziv;
         this.opis = opis;
         this.rating = rating;
         this.kategorija = kategorija;
+        this.kreatorid = kreatorid;
+    }
+
+    public int getKreatorid(){
+        return kreatorid;
+    }
+
+    public void setKreatorid(int kreatorid){
+        this.kreatorid = kreatorid;
     }
 
     public int getId() {

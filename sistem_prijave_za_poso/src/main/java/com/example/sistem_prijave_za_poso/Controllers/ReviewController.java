@@ -47,4 +47,17 @@ public class ReviewController {
         reviewService.deleteReview(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/korisnik/{korisnikid}")
+    public ResponseEntity<List<ReviewDto>> getAllReviewsKorisnik(@PathVariable int korisnikid) {
+        List<ReviewDto> reviews = reviewService.getAllReviewsKorisnik(korisnikid);
+        return ResponseEntity.ok(reviews);
+    }
+
+    @GetMapping("/job/{posaoid}")
+    public ResponseEntity<List<ReviewDto>> getAllReviewsPosao(@PathVariable int posaoid) {
+        List<ReviewDto> reviews = reviewService.getAllReviewsPosao(posaoid);
+        return ResponseEntity.ok(reviews);
+    }
+
 }

@@ -6,6 +6,8 @@ import com.example.sistem_prijave_za_poso.Mapper.ReviewMapper;
 import com.example.sistem_prijave_za_poso.Models.Review;
 import com.example.sistem_prijave_za_poso.Repositories.ReviewRepository;
 import com.example.sistem_prijave_za_poso.Services.ReviewService;
+
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,4 +59,23 @@ public class ReviewServiceImp implements ReviewService {
                 .orElseThrow(() -> new ResourceNotFoundException("Recenzija sa ID-em " + id + " nije pronađena."));
         reviewRepository.delete(review);
     }
+
+    @Override
+    public List<ReviewDto> getAllReviewsKorisnik(int korisnikid) {
+        return reviewRepository.findAll().stream()
+            .filter(review -> review.getKorisnikId() == korisnikid) 
+            .map(ReviewMapper::mapToReviewDto)
+            .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ReviewDto> getAllReviewsPosao(int posaoid) {
+        return reviewRepository.findAll().stream()
+            .filter(review -> review.getPosaoId() == posaoid) 
+            .map(ReviewMapper::mapToReviewDto)
+            .collect(Collectors.toList());
+    }
+
+
+
 }

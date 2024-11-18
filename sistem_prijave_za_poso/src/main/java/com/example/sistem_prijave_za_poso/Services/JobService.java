@@ -16,6 +16,6 @@ public interface JobService {
 
     void deleteJob(int id);
 
-
+    List<JobDto> getAllJobsKreator(int kreatorid);
 
 }

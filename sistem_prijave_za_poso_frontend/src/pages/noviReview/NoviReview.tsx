@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import "./NoviReview.css";
 import { Header } from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
@@ -10,6 +10,11 @@ export const NoviReview = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>(); 
   const isEditMode = Boolean(id); 
+  const location = useLocation();
+  const posaoid = location.state?.posaoid || null; 
+  const userId = localStorage.getItem("userId");
+  const userIdInt: number = userId ? parseInt(userId, 10) : 0; 
+  const posaoIdInt: number = posaoid ? parseInt(posaoid, 10) : 0;
 
   useEffect(() => {
     if (isEditMode) {
@@ -39,8 +44,9 @@ export const NoviReview = () => {
       return;
     }
 
-    const review = { sadrzaj, ocjena };
+    
 
+    const review = { sadrzaj, ocjena, korisnikId: userIdInt, posaoId: posaoIdInt };
     try {
       const response = await fetch(
         isEditMode ? `http://localhost:8080/api/reviews/${id}` : "http://localhost:8080/api/reviews",
@@ -54,6 +60,8 @@ export const NoviReview = () => {
       );
 
       if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData)
         alert(isEditMode ? "Recenzija uspješno ažurirana!" : "Recenzija uspješno kreirana!");
         navigate("/");  
       } else {

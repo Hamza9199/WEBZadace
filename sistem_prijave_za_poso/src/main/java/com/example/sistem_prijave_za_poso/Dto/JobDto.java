@@ -8,15 +8,26 @@ public class JobDto {
     private String opis;
     private int rating;
     private String kategorija; 
+    private int kreatorid; //foreign key od Korisnka koji je kreirao posao
+
 
     public JobDto() {}
 
-    public JobDto(int id, String naziv, String opis, int rating, String kategorija) {
+    public JobDto(int id, String naziv, String opis, int rating, String kategorija, int kreatorid) {
         this.id = id;
         this.naziv = naziv;
         this.opis = opis;
         this.rating = rating;
         this.kategorija = kategorija;
+        this.kreatorid = kreatorid;
+    }
+
+    public int getKreatorid(){
+        return kreatorid;
+    }
+
+    public void setKreatorid(int kreatorid){
+        this.kreatorid = kreatorid;
     }
 
     public int getId() {

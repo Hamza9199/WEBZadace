@@ -7,6 +7,8 @@ interface Review {
   id: number;
   sadrzaj: string;
   ocjena: number;
+  korisnikId: number;
+  posaoId: number;
 }
 
 const ListaReviews: React.FC = () => {
@@ -57,6 +59,8 @@ const ListaReviews: React.FC = () => {
               <th>ID</th>
               <th>Sadržaj</th>
               <th>Ocjena</th>
+              <th>Korisnik</th>
+              <th>Posao</th>
               <th>Akcije</th>
             </tr>
           </thead>
@@ -66,6 +70,9 @@ const ListaReviews: React.FC = () => {
                 <td>{review.id}</td>
                 <td>{review.sadrzaj}</td>
                 <td>{review.ocjena}</td>
+                <td>{review.korisnikId}</td>
+                <td>{review.posaoId}</td>
+
                 <td>
                   <button
                     className="btn btn-info"

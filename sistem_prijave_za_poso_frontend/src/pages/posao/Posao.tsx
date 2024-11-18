@@ -3,19 +3,28 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 
-
 interface Job {
   id: number;
   naziv: string;
   opis: string;
   rating: number;
-  kategorija: string; 
+  kategorija: string;
+}
+
+interface Review {
+  id: number;
+  sadrzaj: string; 
+  ocjena: number; 
+  korisnikid: number;
+  posaoid: number;
 }
 
 const Posao = () => {
-  const { id } = useParams<{ id: string }>(); 
-  const [job, setJob] = useState<Job | null>(null); 
-  const [loading, setLoading] = useState<boolean>(true);
+  const { id } = useParams<{ id: string }>();
+  const [job, setJob] = useState<Job | null>(null);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [loadingJob, setLoadingJob] = useState<boolean>(true);
+  const [loadingReviews, setLoadingReviews] = useState<boolean>(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,47 +36,100 @@ const Posao = () => {
             throw new Error("Nije moguće dohvatiti podatke o poslu.");
           }
           const data = await response.json();
-          setJob(data); 
+          setJob(data);
         } catch (error) {
-            console.error("Došlo je do greške:", error);
+          console.error("Došlo je do greške:", error);
         } finally {
-          setLoading(false); 
+          setLoadingJob(false);
         }
       };
       fetchJobDetails();
     }
-  }, [id]); 
+  }, [id]);
 
-  if (loading) {
-    return <div>Učitavanje...</div>;
-  }
+  useEffect(() => {
+    if (id) {
+      const fetchReviews = async () => {
+        try {
+          const response = await fetch(`http://localhost:8080/api/reviews/job/${id}`);
+          if (!response.ok) {
+            throw new Error("Nije moguće dohvatiti recenzije za posao.");
+          }
+          const data = await response.json();
+          setReviews(data);
+        } catch (error) {
+          console.error("Došlo je do greške:", error);
+        } finally {
+          setLoadingReviews(false);
+        }
+      };
+      fetchReviews();
+    }
+  }, [id]);
 
   const handleReview = () => {
-      navigate("/noviReview")
+    navigate("/noviReview", { state: { posaoid: id } }); 
+  };
+  
+  const handleReview2 = (id: number) => {
+    navigate(`/review/${id}`)
   }
 
+  
+
   return (
-  <>
-    <Header/>
-      <div>
-        <label onClick={handleReview}>
-            Ostavi Review Na Posao
-        </label>
-      </div>
+    <>
+      <Header />
       <div className="job-details">
-        {job ? (
+        {loadingJob ? (
+          <div>Učitavanje podataka o poslu...</div>
+        ) : job ? (
           <div>
             <h2>{job.naziv}</h2>
-            <p><strong>Kategorija:</strong> {job.kategorija}</p> 
-            <p><strong>Ocjena:</strong> {job.rating}</p> 
-            <p><strong>Opis:</strong></p>
-            <p>{job.opis}</p>
+            <p>
+              <strong>Kategorija:</strong> {job.kategorija}
+            </p>
+            <p>
+              <strong>Ocjena:</strong> {job.rating}
+            </p>
+            <p>
+              <strong>Opis:</strong> {job.opis}
+            </p>
           </div>
         ) : (
           <div>Posao nije pronađen.</div>
         )}
       </div>
-      <Footer/>
+
+      <div>
+        <button onClick={handleReview}>Ostavi Review Na Posao</button>
+      </div>
+
+      <div className="job-reviews">
+        <h3>Recenzije</h3>
+        {loadingReviews ? (
+          <div>Učitavanje recenzija...</div>
+        ) : reviews.length > 0 ? (
+          <ul>
+            {reviews.map((review) => (
+              <li key={review.id} onDoubleClick={() => handleReview2(review.id)}>
+                
+                <p>
+                  <strong>Komentar:</strong> {review.sadrzaj}
+                </p>
+                <p>
+                  <strong>Ocjena:</strong> {review.ocjena}
+                </p>
+                
+                  
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Trenutno nema recenzija za ovaj posao.</p>
+        )}
+      </div>
+      <Footer />
     </>
   );
 };

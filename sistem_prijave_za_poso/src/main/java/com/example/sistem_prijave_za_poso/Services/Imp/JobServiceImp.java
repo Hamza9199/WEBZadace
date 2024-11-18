@@ -71,7 +71,20 @@ public class JobServiceImp implements JobService {
         jobRepository.deleteById(id);
     }
     
-    
+    @Override
+    public List<JobDto> getAllJobsKreator(int kreatorid){
+
+        List<Job> jobs = jobRepository.findAll()
+        .stream()
+        .filter(job -> job.getKreatorid() == kreatorid)
+        .collect(Collectors.toList());
+
+        if (jobs.isEmpty()) {
+            throw new ResourceNotFoundException("Nijedan posao nije pronađen.");
+        }
+        return jobs.stream().map(JobMapper::mapToJobDto).collect(Collectors.toList());
+    }
+
     
 
     

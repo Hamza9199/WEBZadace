@@ -10,4 +10,8 @@ public interface ReviewService {
     List<ReviewDto> getAllReviews();
     ReviewDto updateReview(int id, ReviewDto reviewDto);
     void deleteReview(int id);
+    List<ReviewDto> getAllReviewsKorisnik(int korisnikid);
+    List<ReviewDto> getAllReviewsPosao(int posaoid);
+
+
 }

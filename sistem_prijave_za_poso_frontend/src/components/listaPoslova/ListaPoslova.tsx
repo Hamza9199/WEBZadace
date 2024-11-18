@@ -7,6 +7,7 @@ interface Job {
   opis: string;
   rating: number;
   kategorija: string;
+  kreatorid : number;
 }
 
 interface ListaPoslovaProps {
@@ -80,6 +81,7 @@ const ListaPoslova: React.FC<ListaPoslovaProps> = ({ searchTerm, selectedCategor
             <th>opis</th>
             <th>rating</th>
             <th>kategorija</th>
+            <th>kreator</th>
             <th>Akcije</th>
           </tr>
         </thead>
@@ -91,6 +93,8 @@ const ListaPoslova: React.FC<ListaPoslovaProps> = ({ searchTerm, selectedCategor
               <td>{posao.opis}</td>
               <td>{posao.rating}</td>
               <td>{posao.kategorija}</td>
+              <td>{posao.kreatorid}</td>
+
               <td>
                 <button className="btn btn-info" onClick={() => updatePosao(posao.id)}>
                   Update

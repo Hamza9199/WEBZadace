@@ -79,7 +79,11 @@ const NoviPosao = () => {
 
         if (!validate()) return;
 
-        const data = { naziv, opis, rating , kategorija };
+        const userId = localStorage.getItem("userId");
+        
+        const userIdInt: number = userId ? parseInt(userId, 10) : 0; 
+
+        const data = { naziv, opis, rating , kategorija , kreatorid: userIdInt};
         const url = numericId
             ? `http://localhost:8080/api/jobs/${numericId}`
             : "http://localhost:8080/api/jobs";
@@ -97,7 +101,8 @@ const NoviPosao = () => {
 
             if (response.ok) {
                 
-                navigate("/dashboard");
+                navigate(`/profil/${userId}`);
+
             } else {
                 console.error("Failed to save job");
             }

@@ -26,6 +26,9 @@ const Posao = () => {
   const [loadingJob, setLoadingJob] = useState<boolean>(true);
   const [loadingReviews, setLoadingReviews] = useState<boolean>(true);
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
+
+  const currentUserId = userId ? parseInt(userId, 10) : 0;
 
   useEffect(() => {
     if (id) {
@@ -76,6 +79,34 @@ const Posao = () => {
   }
 
   
+  const handlePrijavaPosla = async () => {
+    if (!id) return;
+
+    const jobKorisnikData = {
+      korisnikId: currentUserId,
+      posaoId: parseInt(id),
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/api/job-korisnik", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(jobKorisnikData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Došlo je do greške pri prijavi na posao.");
+      }
+
+      alert("Uspješno ste se prijavili na posao!");
+    } catch (error) {
+      console.error("Greška pri prijavi na posao:", error);
+      alert("Prijava na posao nije uspjela. Pokušajte ponovo.");
+    }
+  };
+
 
   return (
     <>
@@ -99,6 +130,12 @@ const Posao = () => {
         ) : (
           <div>Posao nije pronađen.</div>
         )}
+      </div>
+
+      <div>
+        <button onClick={handlePrijavaPosla}>
+          Prijava na Posao
+        </button>
       </div>
 
       <div>

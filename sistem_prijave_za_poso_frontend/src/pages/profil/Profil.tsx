@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Header } from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import ReactModal from "react-modal"
 
 interface Korisnik {
   id: number;
@@ -24,16 +25,65 @@ interface ReviewDto {
 const Profil = () => {
   const { id } = useParams<{ id: string }>();
   const history = useNavigate();
+  ReactModal.setAppElement('#root'); 
 
-  const [korisnik, setKorisnik] = useState<Korisnik | null>(null);
+  const [korisnik, setKorisnik] = useState<Korisnik | null>(null);  
   const [jobs, setJobs] = useState<Job[]>([]);
   const [reviews, setReviews] = useState<ReviewDto[]>([]);
   const [newEmail, setNewEmail] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
+  const [jobApplicantCounts, setJobApplicantCounts] = useState<{ [key: number]: number }>({});
+  const [selectedJobEmails, setSelectedJobEmails] = useState<string[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalJobName, setModalJobName] = useState<string>("")
+
 
   const apiUrlKorisnik = "http://localhost:8080/api/korisnik";
   const apiUrlJobs = "http://localhost:8080/api/jobs/kreator";
   const apiUrlReviews = "http://localhost:8080/api/reviews/korisnik";
+  const apiUrlEmails = "http://localhost:8080/api/job-korisnik";
+
+  const fetchEmailsForJob = async (jobId: number, jobName: string) => {
+    try {
+      const response = await fetch(`${apiUrlEmails}/${jobId}/emails`);
+      if (!response.ok) throw new Error("Greška pri dohvaćanju emailova");
+      const emails: string[] = await response.json();
+      setSelectedJobEmails(emails);
+      setModalJobName(jobName);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("Greška: ", error);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedJobEmails([]);
+  };
+
+
+  useEffect(() => {
+    const fetchApplicantCounts = async () => {
+      try {
+        const counts: { [key: number]: number } = {};
+        for (const job of jobs) {
+          const response = await fetch(`http://localhost:8080/api/job-korisnik/${job.id}/broj-prijava`);
+          if (response.ok) {
+            const count = await response.json();
+            counts[job.id] = count;
+          }
+        }
+        setJobApplicantCounts(counts);
+      } catch (error) {
+        console.error("Greška pri učitavanju broja prijava:", error);
+      }
+    };
+  
+    if (jobs.length > 0) {
+      fetchApplicantCounts();
+    }
+  }, [jobs]);
+  
 
   useEffect(() => {
     const fetchKorisnik = async () => {
@@ -199,6 +249,7 @@ const Profil = () => {
                 <li key={job.id} onDoubleClick={() => ucitajPosao(job.id)}>
                   <h3>{job.naziv}</h3>
                   <p>{job.opis}</p>
+                  <p><strong>Broj prijavljenih:</strong> {jobApplicantCounts[job.id] || 0}</p>
                   <button className="btn btn-info" onClick={() => updatePosao(job.id)}>
                     Update
                   </button>
@@ -209,6 +260,9 @@ const Profil = () => {
                   >
                     Delete
                   </button>
+                  <button onClick={() => fetchEmailsForJob(job.id, job.naziv)}>
+                    Prikaži prijavljene
+                  </button>
                 </li>
               ))}
             </ul>
@@ -216,6 +270,8 @@ const Profil = () => {
             <p>Nema poslova za ovog korisnika.</p>
           )}
         </div>
+
+          
 
         <div>
           <h2>Recenzije</h2>
@@ -245,6 +301,21 @@ const Profil = () => {
             <p>Korisnik nema recenzija.</p>
           )}
         </div>
+
+
+    <ReactModal
+            isOpen={isModalOpen}
+            onRequestClose={closeModal}
+            contentLabel="Prijavljeni za posao"
+          >
+            <h3>Prijavljeni za posao: {modalJobName}</h3>
+            <ul>
+              {selectedJobEmails.map((email, index) => (
+                <li key={index}>{email}</li>
+              ))}
+            </ul>
+            <button onClick={closeModal}>Zatvori</button>
+    </ReactModal>
       </div>
       <Footer />
     </>

@@ -3,6 +3,7 @@ package com.example.sistem_prijave_za_poso.Models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -24,12 +25,16 @@ public class Korisnik {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "is_admin", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private Boolean isAdmin = false;
+
     public Korisnik() {}
 
     public Korisnik(int id, String email, String password) {
         this.id = id;
         this.email = email;
         this.password = password;
+        this.isAdmin = false; 
     }
 
     public int getId() {
@@ -54,5 +59,13 @@ public class Korisnik {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

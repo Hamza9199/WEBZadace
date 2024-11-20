@@ -2,6 +2,10 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+    background-color: #333333;
+    font-family: 'Arial', sans-serif;
+    color: #858484;
+    margin: 10px;
 }
 
 .dashboard-section {
@@ -9,39 +13,94 @@
 }
 
 .dashboard-section h2 {
-    color: #333;
-    margin-bottom: 10px;
+    color: #0b0a0a;
+    margin-bottom: 15px;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.lista-poslova, .lista-korisnika {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border-radius: 5px;
+.dashboard-lists {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
 }
 
-.lista-poslova ul, .lista-korisnika ul {
+.lista-korisnika, .lista-poslova {
+    width: 48%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.lista-korisnika ul, .lista-poslova ul {
     list-style-type: none;
-    padding-left: 0;
+    padding: 0;
+    margin: 0;
 }
 
-.lista-poslova li, .lista-korisnika li {
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
+.lista-korisnika li, .lista-poslova li {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1rem;
+    color: #555555;
 }
 
-.lista-poslova li:last-child, .lista-korisnika li:last-child {
+.lista-korisnika li:last-child, .lista-poslova li:last-child {
     border-bottom: none;
 }
 
-
 .charts-container {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 20px;
-  }
-  
-  .chart {
-    width: 45%;
-  }
+    margin-top: 30px;
+}
+
+.chart {
+    width: 65%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.lista-reviews {
+    width: 30%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.lista-reviews ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-reviews li {
+    padding: 10px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1rem;
+    color: #555555;
+}
+
+.lista-reviews li:last-child {
+    border-bottom: none;
+}
+
+@media (max-width: 768px) {
+    .dashboard-lists,
+    .charts-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .lista-korisnika, .lista-poslova, .chart, .lista-reviews {
+        width: 100%;
+    }
+}

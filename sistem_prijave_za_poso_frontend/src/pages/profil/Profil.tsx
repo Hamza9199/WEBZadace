@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Header } from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
-import ReactModal from "react-modal"
+import ReactModal from "react-modal";
+import './Profil.css'
 
 interface Korisnik {
   id: number;
@@ -216,7 +217,7 @@ const Profil = () => {
       <Header />
       <div className="profile-page">
         {korisnik ? (
-          <div>
+          <div className="user-section">
             <h2>Profil Korisnika</h2>
             <p><strong>Email:</strong> {korisnik.email}</p>
             <div>
@@ -241,7 +242,7 @@ const Profil = () => {
           <p>Učitavanje...</p>
         )}
 
-        <div>
+        <div className="jobs-section">
           <h2>Lista Poslova</h2>
           {jobs.length > 0 ? (
             <ul>
@@ -273,7 +274,7 @@ const Profil = () => {
 
           
 
-        <div>
+        <div className="reviews-section">
           <h2>Recenzije</h2>
           {reviews.length > 0 ? (
             <ul>

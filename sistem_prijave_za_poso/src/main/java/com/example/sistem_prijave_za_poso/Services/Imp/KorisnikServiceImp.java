@@ -116,4 +116,13 @@ public class KorisnikServiceImp implements KorisnikService, UserDetailsService
 		return KorisnikMapper.mapToKorisnikDto(korisnik);
 	}
 
+
+	@Override
+	public boolean isAdmin(int id) {
+		Korisnik korisnik = korisnikRepository.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("Korisnik sa ID-jem " + id + " ne postoji"));
+
+		return Boolean.TRUE.equals(korisnik.getIsAdmin());
+	}
+
 }

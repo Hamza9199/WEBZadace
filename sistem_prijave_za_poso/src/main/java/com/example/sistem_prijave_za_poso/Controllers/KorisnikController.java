@@ -100,4 +100,10 @@ public class KorisnikController
 	}
 
 
+	@GetMapping("/korisnik/{id}/is-admin")
+    public ResponseEntity<Boolean> isAdmin(@PathVariable int id) {
+        boolean isAdmin = korisnikService.isAdmin(id);
+        return ResponseEntity.ok(isAdmin);
+    }
+
 }

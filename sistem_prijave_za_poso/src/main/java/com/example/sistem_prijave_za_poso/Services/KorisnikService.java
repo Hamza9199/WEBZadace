@@ -20,4 +20,6 @@ public interface KorisnikService {
 
     KorisnikDto getKorisnikByEmail(String email);
 
+    boolean isAdmin(int id);
+
 }

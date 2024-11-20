@@ -25,4 +25,6 @@ public interface JobKorisnikRepository extends JpaRepository<JobKorisnik, Intege
     @Query("SELECT k.email FROM JobKorisnik jk JOIN Korisnik k ON jk.korisnikId = k.id WHERE jk.posaoId = :posaoId")
     List<String> findEmailsByPosaoId(@Param("posaoId") int posaoId);
 
+
+    
 }

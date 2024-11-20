@@ -66,9 +66,9 @@ export const Home = () => {
   return (
     <>
       <Header />
-
-      <div>
-        <label onClick={handleDodaj}>
+    <div className="dude">  
+      <div >
+        <label className="good" onClick={handleDodaj}>
           Želis dodati posao?
         </label>
       </div>
@@ -124,7 +124,7 @@ export const Home = () => {
           )}
         </div>
       </div>
-
+      </div>
       <Footer />
     </>
   );

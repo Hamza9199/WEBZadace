@@ -108,8 +108,8 @@ const Register = () => {
 
     return (
         <div className="center-form">
-            <h1 className="naslov">Register</h1>
             <Form onSubmit={handleSubmit}>
+            <h1 className="naslov">Register</h1>
             <FormGroup controlId="formBasicEmail">
                 <FormControl
                 type="text"

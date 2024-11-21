@@ -1,6 +1,7 @@
 package com.example.sistem_prijave_za_poso.Services.Imp;
 
 import com.example.sistem_prijave_za_poso.Dto.KorisnikDto;
+import com.example.sistem_prijave_za_poso.Dto.UpdatePasswordDto;
 import com.example.sistem_prijave_za_poso.Exception.ResourceNotFoundException;
 import com.example.sistem_prijave_za_poso.Mapper.KorisnikMapper;
 import com.example.sistem_prijave_za_poso.Models.Korisnik;
@@ -20,6 +21,7 @@ public class KorisnikServiceImp implements KorisnikService, UserDetailsService
 {
 
 	private final KorisnikRepository korisnikRepository;
+
 
 	public KorisnikServiceImp (KorisnikRepository korisnikRepository)
 	{
@@ -124,5 +126,14 @@ public class KorisnikServiceImp implements KorisnikService, UserDetailsService
 
 		return Boolean.TRUE.equals(korisnik.getIsAdmin());
 	}
+
+	@Override
+	public KorisnikDto updateSifra(int id, UpdatePasswordDto updatePasswordDto) {
+		throw new UnsupportedOperationException("Unimplemented method 'updateSifra'");
+	}
+
+	
+
+	
 
 }

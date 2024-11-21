@@ -1,6 +1,7 @@
 package com.example.sistem_prijave_za_poso.Controllers;
 
 import com.example.sistem_prijave_za_poso.Dto.KorisnikDto;
+import com.example.sistem_prijave_za_poso.Dto.UpdatePasswordDto;
 import com.example.sistem_prijave_za_poso.Services.KorisnikService;
 
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ public class KorisnikController
 		this.passwordEncoder = passwordEncoder;
 	}
 
+	
 	@PostMapping("/login")
 	public ResponseEntity<?> loginKorisnik(@RequestBody KorisnikDto korisnikDto) {
 		KorisnikDto provjeriKorisnik = korisnikService.getKorisnikByEmail(korisnikDto.getEmail());
@@ -41,7 +43,6 @@ public class KorisnikController
 
 		return ResponseEntity.ok(provjeriKorisnik);
 	}
-
 
 
 
@@ -89,7 +90,18 @@ public class KorisnikController
 	{
 		KorisnikDto updatedKorisnik = korisnikService.updateKorisnik(korisnikId, korisnikDto);
 		return ResponseEntity.ok(updatedKorisnik);
-	}
+	}	
+
+	
+	@PutMapping("/{id}/password")
+    public ResponseEntity<?> updateSifra(
+            @PathVariable("id") int korisnikId,
+            @RequestBody UpdatePasswordDto passwordDto) {
+
+		korisnikService.updateSifra(korisnikId, passwordDto);
+
+        return ResponseEntity.ok("Lozinka uspješno promijenjena.");
+    }
 
 
 	@DeleteMapping( "/korisnik/{id}" )

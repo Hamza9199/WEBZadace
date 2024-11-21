@@ -31,8 +31,7 @@ const Profil = () => {
   const [korisnik, setKorisnik] = useState<Korisnik | null>(null);  
   const [jobs, setJobs] = useState<Job[]>([]);
   const [reviews, setReviews] = useState<ReviewDto[]>([]);
-  const [newEmail, setNewEmail] = useState<string>("");
-  const [newPassword, setNewPassword] = useState<string>("");
+  const [oldPassword, setOldPassword] = useState<string>("");  const [newPassword, setNewPassword] = useState<string>("");
   const [jobApplicantCounts, setJobApplicantCounts] = useState<{ [key: number]: number }>({});
   const [selectedJobEmails, setSelectedJobEmails] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -152,29 +151,37 @@ const Profil = () => {
   }, [id]);
 
   const handleUpdate = async () => {
+    if (!oldPassword || !newPassword) {
+      alert("Popunite sva polja!");
+      return;
+    }
+  
     try {
-      const updatedKorisnik = {
-        email: newEmail || korisnik?.email,
-        password: newPassword || korisnik?.password,
+
+      const passwordUpdateDto = {
+        oldPassword,
+        newPassword,
       };
 
-      const response = await fetch(`${apiUrlKorisnik}/${id}`, {
+      const response = await fetch(`${apiUrlKorisnik}/${id}/password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedKorisnik),
+        body: JSON.stringify({ passwordUpdateDto }),
       });
-
-      if (!response.ok) {
-        throw new Error("Greška pri ažuriranju profila");
+  
+      if (response.ok) {
+        alert("Lozinka uspješno promijenjena");
+        setOldPassword("");
+        setNewPassword("");
+      } else {
+        const error = await response.json();
+        alert(error.message || "Greška pri promjeni lozinke");
       }
-
-      const data: Korisnik = await response.json();
-      setKorisnik(data);
-      history(`/profil/${id}`);
     } catch (error) {
-      console.error("Greška: ", error);
+      console.error("Greška:", error);
+      alert("Dogodila se greška. Pokušajte ponovo.");
     }
   };
 
@@ -221,12 +228,13 @@ const Profil = () => {
             <h2>Profil Korisnika</h2>
             <p><strong>Email:</strong> {korisnik.email}</p>
             <div>
-              <input
-                type="email"
-                placeholder="Novi email"
-                value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)}
-              />
+            <input
+              type="password"
+              placeholder="Stara lozinka"
+              value={oldPassword}
+              onChange={(e) => setOldPassword(e.target.value)}
+            />
+
             </div>
             <div>
               <input

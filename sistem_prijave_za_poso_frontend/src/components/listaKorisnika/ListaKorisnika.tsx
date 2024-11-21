@@ -8,6 +8,7 @@ const ListaKorisnika = () => {
         id: number;
         email: string;
         password: string;
+        isAdmin: boolean;
     }
 
     const [korisnici, setKorisnici] = useState<Korisnik[]>([]);
@@ -62,6 +63,7 @@ const ListaKorisnika = () => {
                         <th>id</th>
                         <th>email</th>
                         <th>sifra</th>
+                        <th>admin</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,6 +73,7 @@ const ListaKorisnika = () => {
                                 <td>{korisnik.id}</td>
                                 <td>{korisnik.email}</td>
                                 <td>{korisnik.password}</td>
+                                <td>{korisnik.isAdmin}</td>
                                 <td>
                                     <button className="btn btn-info" onClick={() => updateKorisnika(korisnik.id)}>Update</button>
                                     <button className="btn btn-danger" onClick={() => obrisiKorisnika(korisnik.id)} style={{marginLeft: "10px"}}>Delete</button>

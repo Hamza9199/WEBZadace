@@ -4,6 +4,7 @@ import com.example.sistem_prijave_za_poso.Dto.KorisnikDto;
 import com.example.sistem_prijave_za_poso.Dto.UpdatePasswordDto;
 import com.example.sistem_prijave_za_poso.Services.KorisnikService;
 
+import org.hibernate.validator.internal.util.stereotypes.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +20,7 @@ public class KorisnikController
 {
 
 	private final KorisnikService korisnikService;
-	private final PasswordEncoder passwordEncoder;
+	private final @Lazy PasswordEncoder passwordEncoder;
 
 
 	public KorisnikController (KorisnikService korisnikService, PasswordEncoder passwordEncoder)
@@ -60,12 +61,17 @@ public class KorisnikController
 
 	
 
-	@PostMapping( "/korisnik" )
-	public ResponseEntity<KorisnikDto> createKorisnik (@RequestBody KorisnikDto korisnikDto)
-	{
+	@PostMapping("/korisnik")
+	public ResponseEntity<KorisnikDto> createKorisnik(@RequestBody KorisnikDto korisnikDto) {
+		if (korisnikDto.getPassword() != null && !korisnikDto.getPassword().isEmpty()) {
+			String hashedPassword = passwordEncoder.encode(korisnikDto.getPassword());
+			korisnikDto.setPassword(hashedPassword);
+		}
+
 		KorisnikDto savedKorisnik = korisnikService.createKorisnik(korisnikDto);
-		return new ResponseEntity<>(savedKorisnik, org.springframework.http.HttpStatus.CREATED);
+		return new ResponseEntity<>(savedKorisnik, HttpStatus.CREATED);
 	}
+
 
 
 	@GetMapping( "/korisnik/{id}" )
@@ -85,18 +91,34 @@ public class KorisnikController
 	}
 
 
-	@PutMapping( "/korisnik/{id}" )
-	public ResponseEntity<KorisnikDto> updateKorisnik (@PathVariable( "id" ) int korisnikId, @RequestBody KorisnikDto korisnikDto)
-	{
+	@PutMapping("/korisnik/{id}")
+	public ResponseEntity<KorisnikDto> updateKorisnik(@PathVariable("id") int korisnikId, @RequestBody KorisnikDto korisnikDto) {
+		if (korisnikDto.getPassword() != null && !korisnikDto.getPassword().isEmpty()) {
+			String hashedPassword = passwordEncoder.encode(korisnikDto.getPassword());
+			korisnikDto.setPassword(hashedPassword);
+		}
+
 		KorisnikDto updatedKorisnik = korisnikService.updateKorisnik(korisnikId, korisnikDto);
 		return ResponseEntity.ok(updatedKorisnik);
-	}	
+	}
+	
 
 	
-	@PutMapping("/{id}/password")
-    public ResponseEntity<?> updateSifra(
-            @PathVariable("id") int korisnikId,
-            @RequestBody UpdatePasswordDto passwordDto) {
+	@PutMapping("/korisnik/{id}/password")
+    public ResponseEntity<?> updateSifra(@PathVariable("id") int korisnikId, @RequestBody UpdatePasswordDto passwordDto) {
+		
+				
+		KorisnikDto korisnik = korisnikService.getKorisnikById(korisnikId);		
+
+
+		if(!passwordEncoder.matches(passwordDto.getOldPassword(), korisnik.getPassword())){
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body("lose");
+		}		
+		
+		String h = passwordEncoder.encode(passwordDto.getNewPassword());	
+
+		passwordDto.setNewPassword(h);
 
 		korisnikService.updateSifra(korisnikId, passwordDto);
 

@@ -7,6 +7,7 @@ import com.example.sistem_prijave_za_poso.Mapper.KorisnikMapper;
 import com.example.sistem_prijave_za_poso.Models.Korisnik;
 import com.example.sistem_prijave_za_poso.Repositories.KorisnikRepository;
 import com.example.sistem_prijave_za_poso.Services.KorisnikService;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,11 +22,13 @@ public class KorisnikServiceImp implements KorisnikService, UserDetailsService
 {
 
 	private final KorisnikRepository korisnikRepository;
+	//private final @Lazy PasswordEncoder passwordEncoder;
 
 
-	public KorisnikServiceImp (KorisnikRepository korisnikRepository)
+	public KorisnikServiceImp (KorisnikRepository korisnikRepository/*, PasswordEncoder passwordEncoder*/)
 	{
 		this.korisnikRepository = korisnikRepository;
+		//this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -129,10 +132,21 @@ public class KorisnikServiceImp implements KorisnikService, UserDetailsService
 
 	@Override
 	public KorisnikDto updateSifra(int id, UpdatePasswordDto updatePasswordDto) {
-		throw new UnsupportedOperationException("Unimplemented method 'updateSifra'");
+
+		Korisnik korisnik = korisnikRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Korisnik sa ID " + id + " nije pronađen."));
+
+		/*if (!passwordEncoder.matches(updatePasswordDto.getOldPassword(), korisnik.getPassword())) {
+			throw new UnauthorizedException("Stara lozinka nije ispravna.");
+		}*/
+
+		korisnik.setPassword(updatePasswordDto.getNewPassword());
+
+		Korisnik updatedKorisnikObj = korisnikRepository.save(korisnik);
+
+		return KorisnikMapper.mapToKorisnikDto(updatedKorisnikObj);
 	}
 
-	
 
 	
 

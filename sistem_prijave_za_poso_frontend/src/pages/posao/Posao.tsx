@@ -107,10 +107,16 @@ const Posao = () => {
     }
   };
 
+  const handleVrati = () => {
+    navigate(-1);
+}
+
 
   return (
     <>
       <Header />
+      <button onClick={handleVrati}>Vrati se Nazad</button>
+
       <div className="job-details">
         {loadingJob ? (
           <div>Učitavanje podataka o poslu...</div>

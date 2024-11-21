@@ -6,9 +6,45 @@ import { useNavigate, useParams } from "react-router-dom";
 const NoviKorisnik = () => {
     const [email, setEmail] = useState("");
     const [sifra, setSifra] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [loading, setLoading] = useState(true);
     const { id } = useParams<{ id: string }>();
     const numericId = id ? parseInt(id, 10) : null;
     const navigate = useNavigate();
+
+    const userId = localStorage.getItem('userId');
+
+
+
+    useEffect(() => {
+        const fetchIsAdmin = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/api/korisnik/${userId}/is-admin`);
+                if (response.ok) {
+                    const data = await response.json();
+                    setIsAdmin(data);
+                    if (!data) {
+                        navigate('/'); 
+                    }
+                } else {
+                    console.error('Greska');
+                    navigate('/'); 
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                navigate('/'); 
+            } finally {
+                setLoading(false); 
+            }
+        };
+
+        if (userId) {
+            fetchIsAdmin();
+        } else {
+            navigate('/'); 
+        }
+    }, [userId, navigate]);
+
 
     useEffect(() => {
         if (numericId) {
@@ -32,6 +68,8 @@ const NoviKorisnik = () => {
         }
     }, [numericId]);
 
+    
+
     const [errors, setErrors] = useState({
         email: "",
         password: ""
@@ -41,6 +79,12 @@ const NoviKorisnik = () => {
         email: string;
         password: string;
     }
+
+      
+    if (loading) {
+        return <p>Loading...</p>; 
+    }
+
 
     const saveKorisnik = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> => {
         e.preventDefault();
@@ -158,11 +202,19 @@ const NoviKorisnik = () => {
         }
     };
 
+    const handleVrati = () => {
+        navigate(-1);
+    }
+
     return (
         <>
             <Header />
+            <button onClick={handleVrati}>Vrati se Nazad</button>
+            {isAdmin && (
             <div>
+
                 <div className="container">
+
                     <div className="row">
                         <div className="col-md-6 offset-md-3">
                             {pageTitle()}
@@ -183,6 +235,7 @@ const NoviKorisnik = () => {
                     </div>
                 </div>
             </div>
+            )}
             <Footer />
         </>
     );

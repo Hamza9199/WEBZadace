@@ -104,6 +104,10 @@ const Register = () => {
         setErrors(errorsCopy);
         return valid;
     };
+
+    const handleChange = () => {
+        navigate("/login")
+    }
    
 
     return (
@@ -142,6 +146,12 @@ const Register = () => {
                 Login
             </Button>
             </Form>
+
+
+            
+            <label onClick={handleChange}>
+                Vec imate profil?
+            </label>
         </div>
     );
 };

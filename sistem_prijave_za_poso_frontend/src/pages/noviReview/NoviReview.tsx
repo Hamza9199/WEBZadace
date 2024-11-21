@@ -73,9 +73,15 @@ export const NoviReview = () => {
     }
   };
 
+  const handleVrati = () => {
+    navigate(-1);
+}
+
   return (
     <>
       <Header />
+      <button onClick={handleVrati}>Vrati se Nazad</button>
+
       <div className="novi-review-container">
         <h2>{isEditMode ? "Ažuriraj Recenziju" : "Dodaj Recenziju"}</h2>
         <form onSubmit={handleSubmit} className="novi-review-form">

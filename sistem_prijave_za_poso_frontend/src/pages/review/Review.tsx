@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Review.css";
 import { Header } from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
@@ -7,6 +7,7 @@ import Footer from "../../components/footer/Footer";
 export const Review = () => {
   const [review, setReview] = useState<{ sadrzaj: string; ocjena: number } | null>(null);
   const { id } = useParams<{ id: string }>(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchReview = async () => {
@@ -26,9 +27,15 @@ export const Review = () => {
     fetchReview();
   }, [id]); 
 
+  const handleVrati = () => {
+    navigate(-1);
+  }
+
   return (
     <>
       <Header />
+      <button onClick={handleVrati}>Vrati se Nazad</button>
+
       <div className="review-container">
         {review ? (
           <>

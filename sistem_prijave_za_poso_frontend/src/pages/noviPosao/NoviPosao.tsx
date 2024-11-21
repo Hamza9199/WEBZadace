@@ -111,9 +111,15 @@ const NoviPosao = () => {
         }
     };
 
+    const handleVrati = () => {
+        navigate(-1);
+    }
+    
     return (
         <>
             <Header />
+            <button onClick={handleVrati}>Vrati se Nazad</button>
+
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 offset-md-3">

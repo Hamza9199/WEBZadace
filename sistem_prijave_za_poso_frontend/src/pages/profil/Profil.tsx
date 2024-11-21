@@ -31,7 +31,8 @@ const Profil = () => {
   const [korisnik, setKorisnik] = useState<Korisnik | null>(null);  
   const [jobs, setJobs] = useState<Job[]>([]);
   const [reviews, setReviews] = useState<ReviewDto[]>([]);
-  const [oldPassword, setOldPassword] = useState<string>("");  const [newPassword, setNewPassword] = useState<string>("");
+  const [oldPassword, setOldPassword] = useState<string>("");  
+  const [newPassword, setNewPassword] = useState<string>("");
   const [jobApplicantCounts, setJobApplicantCounts] = useState<{ [key: number]: number }>({});
   const [selectedJobEmails, setSelectedJobEmails] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -163,15 +164,18 @@ const Profil = () => {
         newPassword,
       };
 
+      console.log(passwordUpdateDto); 
       const response = await fetch(`${apiUrlKorisnik}/${id}/password`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ passwordUpdateDto }),
+        body: JSON.stringify( passwordUpdateDto ),
       });
-  
+      
+      
       if (response.ok) {
+       
         alert("Lozinka uspješno promijenjena");
         setOldPassword("");
         setNewPassword("");
@@ -181,6 +185,7 @@ const Profil = () => {
       }
     } catch (error) {
       console.error("Greška:", error);
+      
       alert("Dogodila se greška. Pokušajte ponovo.");
     }
   };
@@ -219,9 +224,15 @@ const Profil = () => {
     }
   };
 
+  const handleVrati = () => {
+    history(-1);
+}
+
   return (
     <>
       <Header />
+      <button onClick={handleVrati}>Vrati se Nazad</button>
+
       <div className="profile-page">
         {korisnik ? (
           <div className="user-section">

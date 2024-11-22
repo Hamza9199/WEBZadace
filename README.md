@@ -1,116 +1,106 @@
-Sistem Prijave za Posao
+# Sistem Prijave za Posao
 
-Ovo je Spring Boot aplikacija koja omogućava upravljanje korisnicima i prijavama za posao. Sistem koristi modernu sigurnost (Spring Security), podršku za relacione baze podataka putem JPA/Hibernate, te omogućava autentifikaciju i autorizaciju korisnika.
-Sadržaj
+Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima i recenzijama. Backend je razvijen u **Spring Boot-u**, dok je frontend izrađen korištenjem **React-a**. Ovaj dokument opisuje kako postaviti i pokrenuti aplikaciju.
 
-    Tehnologije
-    Postavke
-        Preduvjeti
-        Pokretanje Aplikacije
-    Ključne Funkcionalnosti
-    Struktura Projekta
-    Sigurnosne Postavke
-    Problemi i Rješenja
+---
 
-Tehnologije
+## Postavke i Pokretanje
 
-    Java 17 - Glavni programski jezik
-    Spring Boot 3.3.6 - Okruženje za brzo razvijanje aplikacija
-    Spring Security - Upravljanje autentifikacijom i autorizacijom
-    JPA/Hibernate - Upravljanje relacionom bazom podataka
-    H2 Database - Koristi se za testiranje (ili promjena na proizvodnu bazu poput PostgreSQL/MySQL)
-    BCrypt - Sigurno enkodiranje lozinki
+### Preduvjeti
 
-Postavke
-Preduvjeti
+1. **Java Development Kit (JDK)** verzije 17 ili novije.
+2. **Maven** za upravljanje projektom.
+3. **Node.js i npm** za frontend aplikaciju.
+4. **MySQL** server za bazu podataka.
 
-    Instaliran Java Development Kit (JDK) verzije 17 ili novije.
-    Maven za upravljanje projektom.
-    Razvijeno i testirano na IDE IntelliJ IDEA (ili bilo kojem modernom IDE-u za Javu).
-    Poželjno koristiti Postman za testiranje API ruta.
+---
 
-Pokretanje Aplikacije
+### Backend: Postavljanje i Pokretanje
 
-    Klonirajte repozitorij:
+1. **Klonirajte repozitorij:**
 
-git clone https://github.com/korisnik/sistem_prijave_za_poso.git
-cd sistem_prijave_za_poso
+   ```bash
+   git clone https://github.com/korisnik/WEBZadace
+   cd sistem_prijave_za_poso
+    ```
 
-Podesite aplikaciju:
+2. **Podesite MySQL bazu podataka:**
+   
+   Kreirajte bazu podataka projekat_baza u MySQL-u:
+ ```sql
+   CREATE DATABASE projekat_baza;
+ ```
 
-    Provjerite u application.properties odgovarajuće postavke baze podataka. Zadano je H2 baza za testiranje:
+3. **Provjerite konfiguraciju:**
 
-    spring.datasource.url=jdbc:h2:mem:testdb
-    spring.datasource.driverClassName=org.h2.Driver
-    spring.datasource.username=sa
-    spring.datasource.password=password
-    spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+   Otvorite fajl src/main/resources/application.properties i provjerite MySQL postavke:
+     ```java
+   spring.datasource.url=jdbc:mysql://localhost:3306/projekat_baza
+   spring.datasource.username=root
+   spring.datasource.password=hamza
+      ```
+     Zamijenite root i hamza svojim korisničkim imenom i lozinkom ako su drugačiji.
+   
+4. **Pokrenite backend aplikaciju:**
+   
+    U terminalu unutar direktorija projekta pokrenite:
 
-Pokrenite aplikaciju:
+   ```java
+   mvn clean install
+   mvn spring-boot:run
+   ```
+   Backend aplikacija će biti dostupna na http://localhost:8080.
 
-Koristite Maven za build i pokretanje:
+5. **Admin korisnik:**
+   
+   Prilikom pokretanja backend aplikacije automatski se kreira admin korisnik sa sljedećim podacima:
 
-    mvn clean install
-    mvn spring-boot:run
+    Email: hamza.gacic.22@size.ba
+    Lozinka: hamza
 
-    Pristupite aplikaciji:
-        Backend API je dostupan na: http://localhost:8080/api.
+### Frontend: Postavljanje i Pokretanje
 
-    Kreirani Admin Korisnik (automatski):
-        Email: admin@example.com
-        Lozinka: securepassword
+1. **Instalirajte Node.js zavisnosti:**
 
-Ključne Funkcionalnosti
+   Idite u direktorij frontend aplikacije i instalirajte zavisnosti:
 
-    Korisničke Uloge:
-        Admin može dodavati, brisati i pregledati korisnike.
-        Registracija korisnika s ulogama "Admin" ili "Korisnik".
-    Sigurnosne Postavke:
-        Svi API-ji su zaštićeni osim /api/**.
-    Baza Podataka:
-        Koristi H2 bazu za testiranje (može se promijeniti u produkcijsku bazu).
-    Kreiranje Admin Korisnika:
-        Automatsko kreiranje admin korisnika pri pokretanju aplikacije.
+   ```java
+   cd sistem_prijave_za_poso_frontend
+   npm install
+   ```
+2. **Pokrenite frontend aplikaciju:**
 
-Struktura Projekta
+   U istom direktoriju pokrenite razvojni server:
+   
+   ```javascript
+   npm run dev
+   ```
+   Frontend aplikacija će biti dostupna na http://localhost:5173.
 
-src/main/java/com/example/sistem_prijave_za_poso/
-├── Controllers/
-│   └── KorisnikController.java   # API endpointi za korisnike
-├── Models/
-│   └── Korisnik.java             # Entitet korisnika
-├── Repositories/
-│   └── KorisnikRepository.java   # JPA repozitorij za korisnike
-├── Services/
-│   ├── KorisnikService.java      # Sloj servisa
-│   └── Imp/KorisnikServiceImp.java # Implementacija servisa
-├── Security/
-│   └── SecurityConfig.java       # Sigurnosne postavke
-└── SistemPrijaveZaPosoApplication.java # Main klasa
 
-Sigurnosne Postavke
+## Ključne Funkcionalnosti
 
-    BCrypt za enkodiranje lozinki.
-    CORS konfiguracija omogućava frontend aplikaciji (default: http://localhost:5173) da komunicira s backendom.
-    Sve rute osim /api/** zahtijevaju autentifikaciju.
+### Korisničke Stranice
 
-Problemi i Rješenja
+Home: Pregled trenutnih poslova na koje je moguće se prijaviti.
+Login/Register: Stranice za prijavu i registraciju korisnika.
+Dashboard: Pregled svih korisnika, recenzija, poslova kao i statistika.
+Dodavanje/Izmjena korisnika: Stranice za dodavanje novih ili izmjenu postojećih korisnika.
+Dodavanje/Izmjena poslova: Stranice za dodavanje novih ili izmjenu postojećih poslova.
+Dodavanje/Izmjena recenzija: Stranice za dodavanje novih ili izmjenu postojećih recenzija.
+Recenzije: Pregled i uređivanje recenzija.
+Posao: Pregled i uređivanje posla, kao i prijava na posao.
+Profil: Pregled profila korisnika, izmjena lozinke, pregled napravljeni poslova i njihovo uređivanje, pregled svojih recenzija na drugim poslovima i njihovo uređivanje.
 
-    Greška @Bean metoda ne smije biti void:
-        Riješeno uklanjanjem @Bean i korištenjem @PostConstruct za inicijalizaciju admin korisnika.
 
-    CORS problem između frontenda i backenda:
-        Dodana konfiguracija CORS-a u SecurityConfig klasu:
+### Backend Funkcionalnosti
 
-    config.addAllowedOrigin("http://localhost:5173");
-    config.addAllowedHeader("*");
-    config.addAllowedMethod("*");
+API endpointi za CRUD operacije nad korisnicima, poslovima i recenzijama.
+Sigurnosne funkcionalnosti (Spring Security) sa zaštitom endpointa.
+BCrypt enkodiranje lozinki za sigurnost.
 
-H2 Baza ne radi na proizvodnom serveru:
+### Frontend Funkcionalnosti
 
-    Zamijeniti H2 postavke s proizvodnom bazom, npr. PostgreSQL:
+Korištenje react-router-dom za navigaciju.
+Zaštićene rute za stranice koje zahtijevaju autentifikaciju.
 
-spring.datasource.url=jdbc:postgresql://localhost:5432/ime_baze
-spring.datasource.username=korisnik
-spring.datasource.password=lozinka
-spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect

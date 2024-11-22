@@ -83,7 +83,7 @@ Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima 
 
 ## Korisničke Stranice
 
-### Home: **Pregled trenutnih poslova na koje je moguće se prijaviti. 
+### Home: ### **Pregled trenutnih poslova na koje je moguće se prijaviti. 
 ### Login/Register: Stranice za prijavu i registraciju korisnika. 
 ### Dashboard: Pregled svih korisnika, recenzija, poslova kao i statistika. 
 ### Dodavanje/Izmjena korisnika: Stranice za dodavanje novih ili izmjenu postojećih korisnika. 

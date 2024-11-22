@@ -21,7 +21,7 @@ Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima 
 
    ```bash
    git clone https://github.com/korisnik/WEBZadace
-   cd sistem_prijave_za_poso
+   cd WEBZadace
     ```
 
 2. **Podesite MySQL bazu podataka:**
@@ -46,6 +46,7 @@ Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima 
     U terminalu unutar direktorija projekta pokrenite:
 
    ```java
+   cd sistem_prijave_za_poso
    mvn clean install
    mvn spring-boot:run
    ```

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Header } from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
+import './Posao.css'
 
 interface Job {
   id: number;
@@ -115,6 +116,7 @@ const Posao = () => {
   return (
     <>
       <Header />
+      <div className="dude3">
       <button onClick={handleVrati}>Vrati se Nazad</button>
 
       <div className="job-details">
@@ -171,6 +173,7 @@ const Posao = () => {
         ) : (
           <p>Trenutno nema recenzija za ovaj posao.</p>
         )}
+      </div>
       </div>
       <Footer />
     </>

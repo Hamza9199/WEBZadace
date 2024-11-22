@@ -111,6 +111,7 @@ const Register = () => {
    
 
     return (
+        <div className='dud2'>
         <div className="center-form">
             <Form onSubmit={handleSubmit}>
             <h1 className="naslov">Register</h1>
@@ -152,6 +153,7 @@ const Register = () => {
             <label onClick={handleChange}>
                 Vec imate profil?
             </label>
+        </div>
         </div>
     );
 };

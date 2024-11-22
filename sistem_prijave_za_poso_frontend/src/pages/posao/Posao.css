@@ -1,0 +1,84 @@
+.dude3 {
+    color: whitesmoke;
+    margin-top: 100px;
+    background-color: #303030;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .job-details,
+  .job-reviews {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #424242;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  
+  h2,
+  h3 {
+    text-align: center;
+    color: #ffcc00;
+  }
+  
+  .job-details p,
+  .job-reviews p {
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  
+  button {
+    display: block;
+    margin: 15px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #e55a00;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    background-color: #525252;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+  }
+  
+  li:hover {
+    transform: scale(1.02);
+  }
+  
+  li p {
+    margin: 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .dude3 {
+      margin: 50px 10px;
+      padding: 15px;
+    }
+  
+    button {
+      width: 90%;
+      font-size: 14px;
+    }
+  }
+  

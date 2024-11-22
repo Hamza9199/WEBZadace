@@ -2,18 +2,17 @@
 
 .good{
   text-decoration: none;
-  color: #333;
+  color: white;
   font-size: 30px;
+  padding-bottom: 10px;
 }
 
-.dude{
-  width: 100vh;
-}
+
 
 .home-container {
-  background-color: #333333;
-  margin: 0 auto;
-  padding: 20px;
+  background-color:rgb(65, 62, 62);
+  padding: 100px;
+  margin-top: 100px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -67,14 +66,16 @@
 }
 
 .table thead {
-  background-color: #007bff;
+  background-color: #4f5256;
   color: #ffffff;
+  
 }
 
 .table th, .table td {
   text-align: left;
   padding: 12px 15px;
   border: 1px solid #ddd;
+  
 }
 
 .table tbody tr {
@@ -89,6 +90,8 @@
 .table tbody tr:active {
   background-color: #e9ecef;
 }
+
+
 
 .table tbody tr:nth-child(odd) {
   background-color: #f9f9f9;

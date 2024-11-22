@@ -5,7 +5,48 @@
     grid-template-columns: 1fr 2fr 1fr;
     gap: 20px;
     padding: 20px;
+
 }
+
+
+.dude{
+    margin-top: 80px;
+
+}
+
+
+.dude2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+    max-width: 300px;
+    margin: 2rem auto; 
+    padding: 1rem;
+    background-color: #333333; 
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .input-field {
+    padding: 50px;
+    font-size: 2rem;
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+    background-color: #1a1a1a; 
+    color: white;
+  }
+  
+  .input-field::placeholder {
+    color: #888; 
+  }
+  
+  .input-field:focus {
+    border-color: #646cff; 
+    outline: none; 
+    box-shadow: 0 0 4px rgba(100, 108, 255, 0.5); 
+  }
+  
+
 
 .profile-page h2 {
     text-align: center;
@@ -13,7 +54,8 @@
 }
 
 .profile-page > div {
-    background-color: #f9f9f9;
+    background-color: #303030;  
+    color: whitesmoke;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -41,8 +83,8 @@
     border-radius: 4px;
     padding: 8px 12px;
     cursor: pointer;
-    margin-right: 10px;
     transition: background-color 0.3s ease;
+    justify-content: center;
 }
 
 .profile-page button:hover {
@@ -68,7 +110,11 @@
 .profile-page .user-section {
     grid-area: user;
     text-align: center;
+
+
 }
+
+
 
 .profile-page .reviews-section {
     grid-area: reviews;
@@ -82,6 +128,45 @@
     max-height: 400px;
 }
 
+
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.8) !important; 
+  
+  }
+  
+  .ReactModal__Content {
+    background-color: #1a1a1a; 
+    color: #f5f5f5; 
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+ 
+  
+  .ReactModal__Content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .ReactModal__Content li {
+    margin-bottom: 10px;
+  }
+  
+  .ReactModal__Content button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .ReactModal__Content button:hover {
+    background-color: #0056b3;
+  }
+  
+
 @media (max-width: 768px) {
     .profile-page {
         grid-template-areas:
@@ -91,3 +176,5 @@
         grid-template-columns: 1fr;
     }
 }
+
+

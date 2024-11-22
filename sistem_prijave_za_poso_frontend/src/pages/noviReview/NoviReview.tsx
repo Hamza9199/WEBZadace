@@ -80,6 +80,7 @@ export const NoviReview = () => {
   return (
     <>
       <Header />
+      <div className="dude">
       <button onClick={handleVrati}>Vrati se Nazad</button>
 
       <div className="novi-review-container">
@@ -112,6 +113,7 @@ export const NoviReview = () => {
             {isEditMode ? "Ažuriraj Recenziju" : "Pošaljite Recenziju"}
           </button>
         </form>
+      </div>
       </div>
       <Footer />
     </>

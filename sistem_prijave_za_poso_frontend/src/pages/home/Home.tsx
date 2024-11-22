@@ -67,13 +67,14 @@ export const Home = () => {
     <>
       <Header />
     <div className="dude">  
+
+      <div className="home-container">
+
       <div >
         <label className="good" onClick={handleDodaj}>
           Želis dodati posao?
         </label>
       </div>
-
-      <div className="home-container">
         <div className="filter-container">
           <input
             type="text"
@@ -99,7 +100,7 @@ export const Home = () => {
 
         <div className="job-list-container">
           {filtriraniPoslovi.length > 0 ? (
-            <table className="table table-striped table-bordered">
+            <table className="table table-striped table-bordered dudee">
               <thead>
                 <tr>
                   <th>naziv</th>

@@ -229,7 +229,7 @@ const Profil = () => {
 }
 
   return (
-    <>
+    <div className="dude">
       <Header />
       <button onClick={handleVrati}>Vrati se Nazad</button>
 
@@ -238,7 +238,7 @@ const Profil = () => {
           <div className="user-section">
             <h2>Profil Korisnika</h2>
             <p><strong>Email:</strong> {korisnik.email}</p>
-            <div>
+            <div className="dude2">
             <input
               type="password"
               placeholder="Stara lozinka"
@@ -246,16 +246,16 @@ const Profil = () => {
               onChange={(e) => setOldPassword(e.target.value)}
             />
 
-            </div>
-            <div>
               <input
                 type="password"
                 placeholder="Nova lozinka"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
-            </div>
+
             <button onClick={handleUpdate}>Ažuriraj Profil</button>
+
+            </div>
           </div>
         ) : (
           <p>Učitavanje...</p>
@@ -327,6 +327,8 @@ const Profil = () => {
             isOpen={isModalOpen}
             onRequestClose={closeModal}
             contentLabel="Prijavljeni za posao"
+            className="ReactModal__Content"
+
           >
             <h3>Prijavljeni za posao: {modalJobName}</h3>
             <ul>
@@ -338,7 +340,7 @@ const Profil = () => {
     </ReactModal>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

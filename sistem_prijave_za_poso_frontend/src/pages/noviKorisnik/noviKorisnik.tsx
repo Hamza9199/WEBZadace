@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/footer/Footer";
 import { Header } from "../../components/header/Header";
 import { useNavigate, useParams } from "react-router-dom";
+import './noviKorisnik.css'
 
 const NoviKorisnik = () => {
     const [email, setEmail] = useState("");
@@ -209,6 +210,7 @@ const NoviKorisnik = () => {
     return (
         <>
             <Header />
+            <div className="dude">
             <button onClick={handleVrati}>Vrati se Nazad</button>
             {isAdmin && (
             <div>
@@ -236,6 +238,7 @@ const NoviKorisnik = () => {
                 </div>
             </div>
             )}
+            </div>
             <Footer />
         </>
     );

@@ -34,6 +34,7 @@ export const Review = () => {
   return (
     <>
       <Header />
+      <div className="dude3">
       <button onClick={handleVrati}>Vrati se Nazad</button>
 
       <div className="review-container">
@@ -48,6 +49,7 @@ export const Review = () => {
         ) : (
           <p>Učitavanje recenzije...</p>
         )}
+      </div>
       </div>
       <Footer />
     </>

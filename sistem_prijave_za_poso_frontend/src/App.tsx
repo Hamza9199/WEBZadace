@@ -14,7 +14,7 @@ import { NoviReview } from './pages/noviReview/NoviReview';
 import { Review } from './pages/review/Review';
 
 function App() {
-  return (
+  return ( 
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
@@ -36,6 +36,7 @@ function App() {
         <Route path="/*" element={<NoMatch />} />
       </Routes>
     </Router>
+
   );
 }
 

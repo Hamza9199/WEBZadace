@@ -117,6 +117,7 @@ const Login = () => {
    
 
     return (
+        <div className='dud2'>
         <div className="center-form">
             <h1 className="naslov">Login</h1>
             <Form onSubmit={handleSubmit}>
@@ -157,6 +158,7 @@ const Login = () => {
             <label onClick={handleChange}>
                 Nemate profil?
             </label>
+        </div>
         </div>
     );
 };

@@ -4,7 +4,7 @@ Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima 
 
 ---
 
-## 🎯 Postavke i Pokretanje
+## Postavke i Pokretanje
 
 ### Preduvjeti
 
@@ -22,42 +22,44 @@ Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima 
    ```bash
    git clone https://github.com/korisnik/WEBZadace
    cd WEBZadace
-    ```
+   ```
 
 2. **Podesite MySQL bazu podataka:**
    
-   Kreirajte bazu podataka projekat_baza u MySQL-u:
- ```sql
+   Kreirajte bazu podataka `projekat_baza` u MySQL-u:
+   
+   ```sql
    CREATE DATABASE projekat_baza;
- ```
+   ```
 
 3. **Provjerite konfiguraciju:**
 
-   Otvorite fajl src/main/resources/application.properties i provjerite MySQL postavke:
-     ```java
+   Otvorite fajl `src/main/resources/application.properties` i provjerite MySQL postavke:
+
+   ```properties
    spring.datasource.url=jdbc:mysql://localhost:3306/projekat_baza
    spring.datasource.username=root
    spring.datasource.password=hamza
-      ```
-     Zamijenite root i hamza svojim korisničkim imenom i lozinkom ako su drugačiji.
-   
-4. **Pokrenite backend aplikaciju:**
-   
-    U terminalu unutar direktorija projekta pokrenite:
+   ```
+   Zamijenite `root` i `hamza` svojim korisničkim imenom i lozinkom ako su drugačiji.
 
-   ```java
+4. **Pokrenite backend aplikaciju:**
+
+   U terminalu unutar direktorija projekta pokrenite:
+
+   ```bash
    cd sistem_prijave_za_poso
    mvn clean install
    mvn spring-boot:run
    ```
-   Backend aplikacija će biti dostupna na http://localhost:8080.
+   Backend aplikacija će biti dostupna na `http://localhost:8080`.
 
 5. **Admin korisnik:**
-   
+
    Prilikom pokretanja backend aplikacije automatski se kreira admin korisnik sa sljedećim podacima:
 
-    Email: hamza.gacic.22@size.ba
-    Lozinka: hamza
+   - Email: `hamza.gacic.22@size.ba`
+   - Lozinka: `hamza`
 
 ### Frontend: Postavljanje i Pokretanje
 
@@ -65,43 +67,43 @@ Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima 
 
    Idite u direktorij frontend aplikacije i instalirajte zavisnosti:
 
-   ```java
+   ```bash
    cd sistem_prijave_za_poso_frontend
    npm install
    ```
+
 2. **Pokrenite frontend aplikaciju:**
 
    U istom direktoriju pokrenite razvojni server:
-   
-   ```javascript
+
+   ```bash
    npm run dev
    ```
-   Frontend aplikacija će biti dostupna na http://localhost:5173.
+   Frontend aplikacija će biti dostupna na `http://localhost:5173`.
 
+---
 
-# Ključne Funkcionalnosti
+## Ključne Funkcionalnosti
 
-## Korisničke Stranice
+### Korisničke Stranice
 
-### Home: Pregled trenutnih poslova na koje je moguće se prijaviti. 
-### Login/Register: Stranice za prijavu i registraciju korisnika. 
-### Dashboard: Pregled svih korisnika, recenzija, poslova kao i statistika. 
-### Dodavanje/Izmjena korisnika: Stranice za dodavanje novih ili izmjenu postojećih korisnika. 
-### Dodavanje/Izmjena poslova: Stranice za dodavanje novih ili izmjenu postojećih poslova. 
-### Dodavanje/Izmjena recenzija: Stranice za dodavanje novih ili izmjenu postojećih recenzija. 
-### Recenzije: Pregled i uređivanje recenzija. 
-### Posao: Pregled i uređivanje posla, kao i prijava na posao. 
-### Profil: Pregled profila korisnika, izmjena lozinke, pregled napravljeni poslova i njihovo uređivanje, pregled svojih recenzija na drugim poslovima i njihovo uređivanje. 
-   
-   
-## Backend Funkcionalnosti
+- **Home:** Pregled trenutnih poslova na koje je moguće se prijaviti.
+- **Login/Register:** Stranice za prijavu i registraciju korisnika.
+- **Dashboard:** Pregled svih korisnika, recenzija, poslova kao i statistika.
+- **Dodavanje/Izmjena korisnika:** Stranice za dodavanje novih ili izmjenu postojećih korisnika.
+- **Dodavanje/Izmjena poslova:** Stranice za dodavanje novih ili izmjenu postojećih poslova.
+- **Dodavanje/Izmjena recenzija:** Stranice za dodavanje novih ili izmjenu postojećih recenzija.
+- **Recenzije:** Pregled i uređivanje recenzija.
+- **Posao:** Pregled i uređivanje posla, kao i prijava na posao.
+- **Profil:** Pregled profila korisnika, izmjena lozinke, pregled napravljeni poslova i njihovo uređivanje, pregled svojih recenzija na drugim poslovima i njihovo uređivanje.
 
-### API endpointi za CRUD operacije nad korisnicima, poslovima i recenzijama.
-### Sigurnosne funkcionalnosti (Spring Security) sa zaštitom endpointa.
-### BCrypt enkodiranje lozinki za sigurnost.
+### Backend Funkcionalnosti
 
-## Frontend Funkcionalnosti
+- **API endpointi** za CRUD operacije nad korisnicima, poslovima i recenzijama.
+- **Sigurnosne funkcionalnosti** (Spring Security) sa zaštitom endpointa.
+- **BCrypt enkodiranje lozinki** za sigurnost.
 
-### Korištenje react-router-dom za navigaciju.
-### Zaštićene rute za stranice koje zahtijevaju autentifikaciju.
+### Frontend Funkcionalnosti
 
+- **Korištenje react-router-dom** za navigaciju.
+- **Zaštićene rute** za stranice koje zahtijevaju autentifikaciju.

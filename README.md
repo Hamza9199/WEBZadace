@@ -83,17 +83,17 @@ Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima 
 
 ### Korisničke Stranice
 
-Home: Pregled trenutnih poslova na koje je moguće se prijaviti.
-Login/Register: Stranice za prijavu i registraciju korisnika.
-Dashboard: Pregled svih korisnika, recenzija, poslova kao i statistika.
-Dodavanje/Izmjena korisnika: Stranice za dodavanje novih ili izmjenu postojećih korisnika.
-Dodavanje/Izmjena poslova: Stranice za dodavanje novih ili izmjenu postojećih poslova.
-Dodavanje/Izmjena recenzija: Stranice za dodavanje novih ili izmjenu postojećih recenzija.
-Recenzije: Pregled i uređivanje recenzija.
-Posao: Pregled i uređivanje posla, kao i prijava na posao.
-Profil: Pregled profila korisnika, izmjena lozinke, pregled napravljeni poslova i njihovo uređivanje, pregled svojih recenzija na drugim poslovima i njihovo uređivanje.
-
-
+   **Home: Pregled trenutnih poslova na koje je moguće se prijaviti. **
+   **Login/Register: Stranice za prijavu i registraciju korisnika. **
+    **Dashboard: Pregled svih korisnika, recenzija, poslova kao i statistika. **
+   ** Dodavanje/Izmjena korisnika: Stranice za dodavanje novih ili izmjenu postojećih korisnika. **
+  **  Dodavanje/Izmjena poslova: Stranice za dodavanje novih ili izmjenu postojećih poslova. **
+  **  Dodavanje/Izmjena recenzija: Stranice za dodavanje novih ili izmjenu postojećih recenzija. ** 
+  **  Recenzije: Pregled i uređivanje recenzija. **
+   **Posao: Pregled i uređivanje posla, kao i prijava na posao. **
+ **  Profil: Pregled profila korisnika, izmjena lozinke, pregled napravljeni poslova i njihovo uređivanje, pregled svojih recenzija na drugim poslovima i njihovo uređivanje. **
+   
+   
 ### Backend Funkcionalnosti
 
 API endpointi za CRUD operacije nad korisnicima, poslovima i recenzijama.

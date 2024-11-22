@@ -94,14 +94,14 @@ Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima 
 ### Profil: Pregled profila korisnika, izmjena lozinke, pregled napravljeni poslova i njihovo uređivanje, pregled svojih recenzija na drugim poslovima i njihovo uređivanje. 
    
    
-### Backend Funkcionalnosti
+## Backend Funkcionalnosti
 
-API endpointi za CRUD operacije nad korisnicima, poslovima i recenzijama.
-Sigurnosne funkcionalnosti (Spring Security) sa zaštitom endpointa.
-BCrypt enkodiranje lozinki za sigurnost.
+### API endpointi za CRUD operacije nad korisnicima, poslovima i recenzijama.
+### Sigurnosne funkcionalnosti (Spring Security) sa zaštitom endpointa.
+### BCrypt enkodiranje lozinki za sigurnost.
 
-### Frontend Funkcionalnosti
+## Frontend Funkcionalnosti
 
-Korištenje react-router-dom za navigaciju.
-Zaštićene rute za stranice koje zahtijevaju autentifikaciju.
+### Korištenje react-router-dom za navigaciju.
+### Zaštićene rute za stranice koje zahtijevaju autentifikaciju.
 

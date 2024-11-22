@@ -4,7 +4,7 @@ Ovo je full-stack aplikacija koja omogućava upravljanje korisnicima, poslovima 
 
 ---
 
-## Postavke i Pokretanje
+## 🎯 Postavke i Pokretanje
 
 ### Preduvjeti
 
